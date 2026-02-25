@@ -839,6 +839,9 @@
       <p class="section-intro">Whether you're building a startup, scaling a team, or looking for marketing leadership — I'd love to hear from you.</p>
 
       <form class="contact-form" onsubmit="handleSubmit(event)">
+        <!-- Formspree hidden fields -->
+        <input type="hidden" name="_subject" value="Asaph Schulman - Contact us form" />
+        <input type="hidden" name="_replyto" id="replyto-field" value="" />
         <div class="contact-grid">
           <div class="form-group">
             <label for="fname">First Name</label>
@@ -850,7 +853,7 @@
           </div>
           <div class="form-group full">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required oninput="document.getElementById('replyto-field').value=this.value" />
           </div>
           <div class="form-group full">
             <label for="subject">Subject</label>
@@ -886,15 +889,47 @@
   </footer>
 
   <script>
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
+      const form = e.target;
       const feedback = document.getElementById('form-feedback');
-      feedback.style.display = 'block';
-      feedback.style.background = 'rgba(79,142,247,0.1)';
-      feedback.style.border = '1px solid rgba(79,142,247,0.3)';
-      feedback.style.color = '#93c5fd';
-      feedback.textContent = '✓ Thanks! Your message has been sent. I\'ll get back to you soon.';
-      e.target.reset();
+      const btn = form.querySelector('.btn-submit');
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      const data = new FormData(form);
+
+      try {
+        const resp = await fetch('https://formspree.io/f/asaph.wt@gmail.com', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        feedback.style.display = 'block';
+        if (resp.ok) {
+          feedback.style.background = 'rgba(79,142,247,0.1)';
+          feedback.style.border = '1px solid rgba(79,142,247,0.3)';
+          feedback.style.color = '#93c5fd';
+          feedback.textContent = '✓ Thanks! Your message has been sent. I\'ll get back to you soon.';
+          form.reset();
+        } else {
+          feedback.style.background = 'rgba(239,68,68,0.1)';
+          feedback.style.border = '1px solid rgba(239,68,68,0.3)';
+          feedback.style.color = '#f87171';
+          feedback.textContent = 'Oops — something went wrong. Please try again or reach out on LinkedIn.';
+        }
+      } catch {
+        feedback.style.display = 'block';
+        feedback.style.background = 'rgba(239,68,68,0.1)';
+        feedback.style.border = '1px solid rgba(239,68,68,0.3)';
+        feedback.style.color = '#f87171';
+        feedback.textContent = 'Oops — something went wrong. Please try again or reach out on LinkedIn.';
+      }
+
+      btn.textContent = 'Send Message →';
+      btn.disabled = false;
     }
   </script>
 
