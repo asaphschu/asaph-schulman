@@ -342,6 +342,64 @@
     .interview-highlights { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
     .interview-highlights span { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.2rem 0.6rem; font-size: 0.72rem; font-weight: 600; color: var(--muted); }
 
+    /* ── Campaigns ── */
+    #campaigns { background: var(--bg); }
+    .campaigns-inner { max-width: 1100px; margin: 0 auto; }
+    .campaigns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .campaign-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .campaign-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
+    .campaign-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a2a4a, #0d1a30);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .campaign-thumb iframe { width: 100%; height: 100%; border: none; position: absolute; inset: 0; }
+    .campaign-thumb-icon {
+      font-size: 3rem;
+      position: relative; z-index: 1;
+    }
+    .campaign-thumb-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .campaign-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .campaign-badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      border-radius: 6px; padding: 0.15rem 0.55rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+      width: fit-content;
+    }
+    .campaign-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.4; }
+    .campaign-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; flex: 1; }
+    .campaign-impact {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem;
+    }
+    .campaign-impact span {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 6px; padding: 0.18rem 0.6rem;
+      font-size: 0.75rem; font-weight: 700; color: var(--gold);
+    }
+    .campaign-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--accent);
+      margin-top: 0.75rem; transition: gap 0.2s; text-decoration: none;
+    }
+    .campaign-link:hover { gap: 0.6rem; text-decoration: none; }
+    .campaign-link svg { width: 14px; height: 14px; }
+
     /* ── Contact ── */
     #contact { background: var(--bg); }
     .contact-inner {
@@ -406,16 +464,52 @@
     }
     footer a { color: var(--accent); }
 
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer; background: none; border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block; height: 2px; width: 100%;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; text-align: center; }
-      .hero-avatar-wrap { display: none; }
-      .hero-stats { justify-content: center; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(10,14,26,0.97); backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 5%;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        padding: 0.75rem 0; font-size: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+
+      .hero-inner {
+        grid-template-columns: 1fr; text-align: center;
+        gap: 2rem;
+      }
+      .hero-avatar-wrap {
+        display: flex; justify-content: center;
+        order: -1;
+      }
+      .hero-avatar { width: 160px; height: 160px; }
+      .hero-stats { justify-content: center; flex-wrap: wrap; gap: 1.25rem; }
       .hero-ctas { justify-content: center; }
       .contact-grid { grid-template-columns: 1fr; }
       nav { padding: 0 4%; }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.8rem; }
     }
 
     /* ── Subtle animations ── */
@@ -435,12 +529,16 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">Asaph Schulman</div>
-    <div class="nav-links">
-      <a href="#achievements">Achievements</a>
-      <a href="#quotes">Testimonials</a>
-      <a href="#interviews">Interviews</a>
-      <a href="#contact">Contact</a>
+    <div class="nav-links" id="nav-links">
+      <a href="#achievements" onclick="closeNav()">Achievements</a>
+      <a href="#campaigns" onclick="closeNav()">Campaigns</a>
+      <a href="#quotes" onclick="closeNav()">Testimonials</a>
+      <a href="#interviews" onclick="closeNav()">Interviews</a>
+      <a href="#contact" onclick="closeNav()">Contact</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -484,7 +582,7 @@
         </div>
       </div>
       <div class="hero-avatar-wrap fade-up delay-2">
-        <div class="hero-avatar"><img src="asaph-photo.jpg" alt="Asaph Schulman" onerror="this.style.display='none'" /></div>
+        <div class="hero-avatar"><img src="asaph-photo.jpg.jpeg" alt="Asaph Schulman" onerror="this.style.display='none'" /></div>
         <div class="hero-avatar-ring"></div>
       </div>
     </div>
@@ -526,6 +624,104 @@
           <h3>Proven People Leader</h3>
           <p>I lead with empathy and high standards, with a genuine ability to hear what's not being said and respond in ways that make people grow.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESSFUL CAMPAIGNS -->
+  <section id="campaigns">
+    <div class="campaigns-inner">
+      <div class="section-label">Creative Work</div>
+      <h2 class="section-title">Campaigns that broke<br/>through the noise</h2>
+      <p class="section-intro">Unconventional ideas turned into marketing moments people still talk about.</p>
+
+      <div class="campaigns-grid">
+
+        <!-- World's Fastest Demo -->
+        <div class="campaign-card">
+          <div class="campaign-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/-hR7Qzf_8X4"
+              title="The World's Fastest Demo – Firebolt"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy">
+            </iframe>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(79,142,247,0.12);border:1px solid rgba(79,142,247,0.3);color:var(--accent);">⚡ YouTube Ad</div>
+            <h3>The World's Fastest Demo</h3>
+            <p class="campaign-desc">We had one shot — 5 seconds before the skip button. So we built a demo that proved Firebolt's speed in the exact time it took to read the headline. Product value delivered before the viewer could opt out.</p>
+            <div class="campaign-impact">
+              <span>5-sec proof of value</span>
+              <span>Pre-skip hook</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=-hR7Qzf_8X4" target="_blank" rel="noopener" class="campaign-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Big Data Game -->
+        <div class="campaign-card">
+          <div class="campaign-thumb" style="background: linear-gradient(135deg, #0d1117, #1a1a2e);">
+            <div class="campaign-thumb-bg" style="font-size:4.5rem;">🎮</div>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);color:#a78bfa;">🕹️ Interactive Game</div>
+            <h3>The Big Data Game</h3>
+            <p class="campaign-desc">A full 8-bit browser game where a data engineer battles the pains of managing pipelines. Cameos from Snowflake, Databricks, AWS, and more. Our competitors even mentioned it — the ultimate signal it worked.</p>
+            <div class="campaign-impact">
+              <span>Tens of thousands of plays</span>
+              <span>Mentioned by competitors</span>
+            </div>
+            <a href="https://www.firebolt.io/big-data-game" target="_blank" rel="noopener" class="campaign-link">
+              Play the game
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Data Engineering Love Song -->
+        <div class="campaign-card">
+          <div class="campaign-thumb" style="background: linear-gradient(135deg, #1a0a2e, #2d0a1a);">
+            <div class="campaign-thumb-bg" style="font-size:4.5rem;">🎵</div>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#f87171;">❤️ Valentine's Day</div>
+            <h3>The Data Engineering Love Song</h3>
+            <p class="campaign-desc">For Valentine's Day, we stitched together the most candid, honest, and occasionally cringe-worthy things engineers said about data — all sourced directly from real Gong call recordings. Authentic, human, and impossible to ignore.</p>
+            <div class="campaign-impact">
+              <span>Made from real Gong calls</span>
+              <span>Viral within the community</span>
+            </div>
+            <a href="https://www.youtube.com/@Firebolt/videos" target="_blank" rel="noopener" class="campaign-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Data Engineering Show -->
+        <div class="campaign-card">
+          <div class="campaign-thumb" style="background: linear-gradient(135deg, #0a1a10, #0d2a1a);">
+            <div class="campaign-thumb-bg" style="font-size:4.5rem;">🎙️</div>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);color:#34d399;">📺 Videocast / Podcast</div>
+            <h3>The Data Engineering Show</h3>
+            <p class="campaign-desc">A top-ranked podcast and videocast for data engineering practitioners. We brought on engineering leaders from the world's biggest tech companies — AWS, Databricks, Confluent, Stripe, and more — for real talk about real challenges.</p>
+            <div class="campaign-impact">
+              <span>World's top tech brands</span>
+              <span>Top-ranked podcast</span>
+            </div>
+            <a href="https://www.dataengineeringshow.com/" target="_blank" rel="noopener" class="campaign-link">
+              Visit the show
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -757,7 +953,7 @@
           <div class="interview-body">
             <div class="interview-badge">Techie Talkie · E13</div>
             <h3>How to Work with Analysts and Achieve Exceptional Results, with Lisa Bennett</h3>
-            <div class="interview-meta">English · 38 min · Lisa Bennett (Cultura)</div>
+            <div class="interview-meta">English · 38 min · Lisa Bennett (Kaltura)</div>
             <a href="https://www.youtube.com/watch?v=SVBTzO8lfvs" target="_blank" rel="noopener" class="interview-link">
               Watch on YouTube
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -889,6 +1085,15 @@
   </footer>
 
   <script>
+    function toggleNav() {
+      document.getElementById('nav-links').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    }
+    function closeNav() {
+      document.getElementById('nav-links').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+
     async function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
