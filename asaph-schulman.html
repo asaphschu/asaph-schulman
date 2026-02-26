@@ -658,6 +658,12 @@
       border: 4px solid #fff;
       border-radius: 50%; box-shadow: none;
       background: var(--rd-orange);
+      overflow: hidden;
+    }
+    body.reddit-mode .hero-avatar img {
+      display: block !important;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
     }
     body.reddit-mode .hero-avatar-ring { display: none; }
     body.reddit-mode .hero-inner > div:first-child { padding-top: 8px; overflow: hidden; }
@@ -1041,13 +1047,111 @@
     body.reddit-mode footer a { color: var(--rd-muted); }
     body.reddit-mode footer a:hover { color: var(--rd-blue); }
 
-    /* ── Mobile: hide sidebar, stack layout ── */
-    @media (max-width: 960px) {
-      body.reddit-mode .rd-sidebar { display: none; }
-      body.reddit-mode .rd-feed-layout { flex-direction: column; padding: 12px; }
-      body.reddit-mode .nav-links { display: none !important; }
-      body.reddit-mode .nav-links.open { display: flex !important; flex-direction: column; position: absolute; top: 48px; }
+    /* ── Reddit Mode: Tablet — hide sidebar ── */
+    @media (max-width: 1100px) {
+      body.reddit-mode section {
+        padding: 16px 16px !important;
+      }
+      #rd-sidebar-fixed { display: none !important; }
     }
+
+    /* ── Reddit Mode: Mobile — full Reddit app feel ── */
+    @media (max-width: 768px) {
+      /* Nav becomes Reddit orange mobile bar */
+      body.reddit-mode nav {
+        background: var(--rd-orange) !important;
+        border-bottom: none !important;
+      }
+      body.reddit-mode .nav-logo {
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        -webkit-text-fill-color: #fff !important;
+        color: #fff !important;
+      }
+      body.reddit-mode nav .nav-links a { color: rgba(255,255,255,0.9) !important; }
+      body.reddit-mode .reddit-toggle-btn {
+        background: rgba(255,255,255,0.2) !important;
+        color: #fff !important;
+      }
+      body.reddit-mode .hamburger span {
+        background: #fff !important;
+      }
+
+      /* Hero: compact mobile profile header */
+      body.reddit-mode #hero::before { height: 100px; }
+      body.reddit-mode .hero-inner {
+        padding: 0 12px 12px !important;
+      }
+      body.reddit-mode .hero-avatar-wrap { margin-top: -24px; }
+      body.reddit-mode .hero-avatar { width: 56px; height: 56px; }
+
+      /* Sections: full width, no right padding */
+      body.reddit-mode section {
+        padding: 0 !important;
+      }
+      body.reddit-mode #pillars .pillars-grid,
+      body.reddit-mode #achievements .achievements-inner,
+      body.reddit-mode #campaigns .campaigns-inner,
+      body.reddit-mode #quotes .quotes-inner,
+      body.reddit-mode #interviews .interviews-inner,
+      body.reddit-mode #contact .contact-inner {
+        padding: 12px 0 0 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+      }
+      /* Section headers: left-padded like Reddit app */
+      body.reddit-mode .section-label,
+      body.reddit-mode h2.section-title,
+      body.reddit-mode .section-intro {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      /* Posts: no border-radius on mobile (edge-to-edge like app) */
+      body.reddit-mode .reddit-post,
+      body.reddit-mode .reddit-comment {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        margin-bottom: 8px;
+      }
+      /* Sort bar: edge-to-edge */
+      body.reddit-mode .rd-sort-bar {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        padding: 10px 12px;
+      }
+
+      /* Hide sidebar entirely on mobile */
+      #rd-sidebar-fixed { display: none !important; }
+
+      /* Mobile bottom nav bar — Reddit-style */
+      body.reddit-mode #rd-mobile-nav {
+        display: flex !important;
+      }
+    }
+
+    /* Reddit mobile bottom nav bar (hidden by default, shown on mobile) */
+    #rd-mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 52px;
+      background: #fff;
+      border-top: 1px solid #EDEFF1;
+      z-index: 200;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 8px;
+    }
+    #rd-mobile-nav .rd-nav-item {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1; font-size: 0.6rem; color: #878A8C;
+      cursor: pointer; padding: 6px 0;
+      gap: 2px;
+    }
+    #rd-mobile-nav .rd-nav-item.active { color: #FF4500; }
+    #rd-mobile-nav .rd-nav-icon { font-size: 1.2rem; line-height: 1; }
   </style>
 </head>
 <body>
@@ -1887,6 +1991,31 @@
           sidebar.innerHTML = buildSidebar();
           document.body.appendChild(sidebar);
         }
+
+        // ── Inject mobile bottom nav bar ──
+        if (!document.getElementById('rd-mobile-nav')) {
+          const mobileNav = document.createElement('div');
+          mobileNav.id = 'rd-mobile-nav';
+          mobileNav.innerHTML = `
+            <div class="rd-nav-item active" onclick="window.scrollTo(0,0)">
+              <span class="rd-nav-icon">🏠</span>
+              <span>Home</span>
+            </div>
+            <div class="rd-nav-item" onclick="document.getElementById('achievements').scrollIntoView({behavior:'smooth'})">
+              <span class="rd-nav-icon">⭐</span>
+              <span>Track Record</span>
+            </div>
+            <div class="rd-nav-item" onclick="document.getElementById('campaigns').scrollIntoView({behavior:'smooth'})">
+              <span class="rd-nav-icon">📢</span>
+              <span>Campaigns</span>
+            </div>
+            <div class="rd-nav-item" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              <span class="rd-nav-icon">✉️</span>
+              <span>Contact</span>
+            </div>
+          `;
+          document.body.appendChild(mobileNav);
+        }
       }
 
       function removeRedditUI() {
@@ -1894,6 +2023,11 @@
         document.querySelectorAll('.rd-sort-bar').forEach(el => el.remove());
         // Remove injected feed layouts
         document.querySelectorAll('.rd-feed-layout').forEach(el => el.remove());
+        // Remove sidebar and mobile nav
+        const sb = document.getElementById('rd-sidebar-fixed');
+        if (sb) sb.remove();
+        const mn = document.getElementById('rd-mobile-nav');
+        if (mn) mn.remove();
         // Pillar cards: restore original markup
         document.querySelectorAll('.pillar-card').forEach(card => {
           if (!card.querySelector('.rp-vote')) return;
