@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asaph Schulman – Marketing Leader & Startup Builder</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --surface2:  #1a2235;
+      --accent:    #4f8ef7;
+      --accent2:   #7c3aed;
+      --gold:      #f59e0b;
+      --text:      #e2e8f0;
+      --muted:     #94a3b8;
+      --border:    rgba(255,255,255,0.08);
+      --radius:    14px;
+      --glow:      0 0 40px rgba(79,142,247,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Sections ── */
+    section { padding: 100px 5%; }
+    section:first-of-type { padding-top: 140px; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h2.section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      line-height: 1.2;
+    }
+    .section-intro {
+      color: var(--muted); font-size: 1.05rem; max-width: 640px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 64px;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(79,142,247,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(124,58,237,0.07) 0%, transparent 60%),
+        var(--bg);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem; align-items: center;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 999px; padding: 0.3rem 0.9rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: block; }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900; letter-spacing: -0.04em; line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.2rem; color: var(--muted); max-width: 540px;
+      margin-bottom: 2.25rem; line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.75rem 1.5rem; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; box-shadow: 0 4px 20px rgba(79,142,247,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,142,247,0.45); text-decoration: none; color:#fff; }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--surface); text-decoration: none; color: var(--text); }
+
+    /* hero avatar */
+    .hero-avatar-wrap {
+      position: relative; flex-shrink: 0;
+    }
+    .hero-avatar {
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(79,142,247,0.2), 0 0 60px rgba(79,142,247,0.2);
+      position: relative; overflow: hidden;
+    }
+    .hero-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
+      display: block;
+    }
+    .hero-avatar-ring {
+      position: absolute; inset: -12px; border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out; mask-composite: exclude;
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* hero stats */
+    .hero-stats {
+      display: flex; gap: 2rem; margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; }
+    .stat-lbl { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-top: 0.1rem; }
+
+    /* ── Pillars (value props) ── */
+    #pillars { background: var(--surface); }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .pillar-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pillar-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
+    .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .pillar-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pillar-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Quotes / Testimonials ── */
+    #quotes { background: var(--surface); }
+    .quotes-inner { max-width: 1100px; margin: 0 auto; }
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .quote-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .quote-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
+    .quote-mark {
+      font-size: 3.5rem; line-height: 1; color: var(--accent);
+      opacity: 0.3; position: absolute; top: 1rem; right: 1.25rem;
+      font-family: Georgia, serif;
+    }
+    .quote-text {
+      font-size: 0.9rem; color: var(--text); line-height: 1.75;
+      font-style: italic; flex: 1;
+    }
+    .quote-author {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding-top: 1rem; border-top: 1px solid var(--border);
+    }
+    .quote-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 800; color: #fff; flex-shrink: 0;
+    }
+    .quote-author-name { font-size: 0.85rem; font-weight: 700; }
+    .quote-author-role { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+    .quotes-see-all { text-align: center; margin-top: 2rem; }
+    .quotes-see-all-link { color: var(--accent); font-weight: 600; font-size: 0.95rem; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .quotes-see-all-link:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+    /* ── Achievements Timeline ── */
+    #achievements { background: var(--bg); }
+    .achievements-inner { max-width: 800px; margin: 0 auto; }
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2), transparent);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 2.5rem 2rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -2.45rem; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px rgba(79,142,247,0.3);
+      flex-shrink: 0;
+    }
+    .tl-header {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      flex-wrap: wrap; margin-bottom: 0.35rem;
+    }
+    .tl-company {
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .tl-period {
+      font-size: 0.72rem; color: var(--muted); font-weight: 500;
+    }
+    .tl-role {
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.3;
+    }
+    .tl-desc {
+      font-size: 0.85rem; color: var(--muted); line-height: 1.65; max-width: 620px;
+    }
+    .tl-metrics {
+      display: flex; gap: 0.6rem; margin-top: 0.75rem; flex-wrap: wrap;
+    }
+    .tl-metric {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 6px; padding: 0.2rem 0.65rem;
+      font-size: 0.78rem; font-weight: 700; color: var(--gold);
+    }
+
+    /* ── Interviews ── */
+    #interviews { background: var(--surface); }
+    .interviews-inner { max-width: 1100px; margin: 0 auto; }
+    .interviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .interview-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .interview-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
+    .interview-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a2a4a, #0d1a30);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      font-size: 0.75rem; color: var(--muted);
+    }
+    .interview-thumb iframe {
+      width: 100%; height: 100%; border: none;
+      position: absolute; inset: 0;
+    }
+    .play-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.3);
+      transition: background 0.2s;
+    }
+    .interview-card:hover .play-overlay { background: rgba(0,0,0,0.1); }
+    .play-btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
+    }
+    .interview-card:hover .play-btn { transform: scale(1.1); }
+    .play-btn svg { width: 20px; height: 20px; fill: #1a1a2e; margin-left: 3px; }
+    .interview-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .interview-badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 6px; padding: 0.15rem 0.55rem;
+      font-size: 0.7rem; font-weight: 700; color: #f87171; letter-spacing: 0.05em;
+      width: fit-content;
+    }
+    .interview-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #ef4444; }
+    .interview-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.4; flex: 1; }
+    .interview-meta { font-size: 0.78rem; color: var(--muted); }
+    .interview-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--accent);
+      margin-top: 0.75rem;
+      transition: gap 0.2s;
+    }
+    .interview-link:hover { gap: 0.6rem; text-decoration: none; }
+    .interview-link svg { width: 14px; height: 14px; }
+
+    .interview-highlights { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .interview-highlights span { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.2rem 0.6rem; font-size: 0.72rem; font-weight: 600; color: var(--muted); }
+
+    /* ── Campaigns ── */
+    #campaigns { background: var(--bg); }
+    .campaigns-inner { max-width: 1100px; margin: 0 auto; }
+    .campaigns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .campaign-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .campaign-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
+    .campaign-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a2a4a, #0d1a30);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .campaign-thumb iframe { width: 100%; height: 100%; border: none; position: absolute; inset: 0; }
+    .campaign-thumb-icon {
+      font-size: 3rem;
+      position: relative; z-index: 1;
+    }
+    .campaign-thumb-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .campaign-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .campaign-badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      border-radius: 6px; padding: 0.15rem 0.55rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+      width: fit-content;
+    }
+    .campaign-card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.4; }
+    .campaign-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; flex: 1; }
+    .campaign-impact {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem;
+    }
+    .campaign-impact span {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 6px; padding: 0.18rem 0.6rem;
+      font-size: 0.75rem; font-weight: 700; color: var(--gold);
+    }
+    .campaign-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--accent);
+      margin-top: 0.75rem; transition: gap 0.2s; text-decoration: none;
+    }
+    .campaign-link:hover { gap: 0.6rem; text-decoration: none; }
+    .campaign-link svg { width: 14px; height: 14px; }
+
+    /* ── Contact ── */
+    #contact { background: var(--bg); }
+    .contact-inner {
+      max-width: 640px; margin: 0 auto;
+    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+    input, textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem; font-family: inherit;
+      padding: 0.75rem 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none; width: 100%;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79,142,247,0.15);
+    }
+    textarea { resize: vertical; min-height: 130px; }
+    .contact-form { display: grid; gap: 1rem; }
+    .form-submit { margin-top: 0.5rem; }
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-size: 1rem; font-weight: 700;
+      padding: 0.9rem 2rem; border-radius: 8px; border: none;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(79,142,247,0.35);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,142,247,0.45); }
+    .btn-submit:active { transform: translateY(0); }
+
+    .contact-also {
+      margin-top: 2rem;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .li-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: #0077b5; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .li-icon svg { width: 22px; height: 22px; fill: #fff; }
+    .contact-also-text { font-size: 0.9rem; }
+    .contact-also-text strong { display: block; font-weight: 700; margin-bottom: 0.15rem; }
+    .contact-also-text span { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 2rem 5%;
+      color: var(--muted); font-size: 0.82rem;
+    }
+    footer a { color: var(--accent); }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer; background: none; border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block; height: 2px; width: 100%;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(10,14,26,0.97); backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 5%;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        padding: 0.75rem 0; font-size: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+
+      .hero-inner {
+        grid-template-columns: 1fr; text-align: center;
+        gap: 2rem;
+      }
+      .hero-avatar-wrap {
+        display: flex; justify-content: center;
+        order: -1;
+      }
+      .hero-avatar { width: 160px; height: 160px; }
+      .hero-stats { justify-content: center; flex-wrap: wrap; gap: 1.25rem; }
+      .hero-ctas { justify-content: center; }
+      .contact-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 4%; }
+    }
+
+    /* ── Subtle animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ── Mode transition ── */
+    body { transition: background 0.3s ease, color 0.3s ease; }
+    nav, footer, input, textarea,
+    .pillar-card, .quote-card, .campaign-card, .interview-card, .tl-item {
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* ── Reddit toggle button ── */
+    .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+    .reddit-toggle-btn {
+      display: flex; align-items: center; gap: 0.35rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 0.3rem 0.7rem;
+      color: var(--muted);
+      font-size: 0.78rem; font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      font-family: inherit; letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .reddit-toggle-btn:hover {
+      background: rgba(255,69,0,0.12);
+      border-color: rgba(255,69,0,0.4);
+      color: #FF4500;
+    }
+    .reddit-toggle-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ════════════════════════════════════════
+       REDDIT MODE — full Reddit UI replica
+       ════════════════════════════════════════ */
+    body.reddit-mode {
+      --rd-orange:  #FF4500;
+      --rd-blue:    #0079D3;
+      --rd-bg:      #DAE0E6;
+      --rd-white:   #FFFFFF;
+      --rd-card:    #FFFFFF;
+      --rd-border:  #EDEFF1;
+      --rd-muted:   #878A8C;
+      --rd-text:    #1c1c1c;
+      --rd-vote-bg: #F6F7F8;
+      background: var(--rd-bg);
+      color: var(--rd-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    /* ── Reddit Top Nav ── */
+    body.reddit-mode nav {
+      background: #FFFFFF !important;
+      backdrop-filter: none;
+      border-bottom: 1px solid var(--rd-border);
+      box-shadow: none;
+      height: 48px;
+      padding: 0 20px;
+    }
+    body.reddit-mode .nav-logo {
+      background: none; -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset; color: var(--rd-text);
+      font-size: 1rem; font-weight: 700; letter-spacing: 0;
+      display: flex; align-items: center; gap: 6px;
+    }
+    /* Reddit wordmark — prepend the Snoo circle */
+    body.reddit-mode .nav-logo::before {
+      content: '';
+      display: inline-block; width: 32px; height: 32px;
+      background: var(--rd-orange);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Ccircle cx='10' cy='10.5' r='6'/%3E%3Ccircle cx='10' cy='9' r='3' fill='white'/%3E%3Ccircle cx='8.5' cy='8.5' r='0.7' fill='%23FF4500'/%3E%3Ccircle cx='11.5' cy='8.5' r='0.7' fill='%23FF4500'/%3E%3Cpath d='M8.5 10.5 Q10 11.8 11.5 10.5' fill='none' stroke='%23FF4500' stroke-width='0.8'/%3E%3Ccircle cx='6.5' cy='6' r='1' fill='white'/%3E%3Ccircle cx='13.5' cy='6' r='1' fill='white'/%3E%3Cline x1='10' y1='6' x2='10' y2='4.5' stroke='white' stroke-width='1'/%3E%3Ccircle cx='10' cy='4' r='0.8' fill='white'/%3E%3C/svg%3E");
+      background-size: 70%;
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    body.reddit-mode .nav-links {
+      background: #FFFFFF;
+      display: flex; flex-direction: row; gap: 0;
+      position: static;
+      border: none; padding: 0; backdrop-filter: none;
+    }
+    body.reddit-mode .nav-links a {
+      color: var(--rd-text); font-size: 0.8rem; font-weight: 700;
+      border: none; padding: 0 10px;
+      border-bottom: none; line-height: 48px;
+      white-space: nowrap;
+    }
+    body.reddit-mode .nav-links a:hover { color: var(--rd-orange); background: var(--rd-bg); text-decoration: none; }
+    body.reddit-mode .hamburger span { background: var(--rd-text); }
+    body.reddit-mode .reddit-toggle-btn {
+      background: var(--rd-orange); border: none;
+      color: #fff; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0;
+      padding: 0.35rem 1rem;
+    }
+    body.reddit-mode .reddit-toggle-btn:hover { background: #E03D00; color: #fff; }
+    body.reddit-mode .reddit-toggle-btn svg { display: none; }
+
+    /* ── Subreddit Banner (replaces Hero) ── */
+    body.reddit-mode #hero {
+      background: var(--rd-bg);
+      min-height: auto !important;
+      padding: 48px 0 0 !important; /* offset for fixed nav */
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+    /* Banner image strip */
+    body.reddit-mode #hero::before {
+      content: '';
+      display: block;
+      height: 160px;
+      background: linear-gradient(135deg, #FF4500 0%, #FF6534 40%, #FFB347 100%);
+    }
+    /* White subreddit identity bar */
+    body.reddit-mode .hero-inner {
+      display: block !important;
+      background: var(--rd-white);
+      border: none; border-bottom: 1px solid var(--rd-border);
+      padding: 0 24px 16px !important;
+      margin: 0 !important; max-width: none !important;
+      width: 100%; gap: 0;
+      position: relative; z-index: 1;
+    }
+    body.reddit-mode .hero-avatar-wrap {
+      order: unset !important; display: block !important;
+      position: relative; margin-top: -38px;
+      flex-shrink: 0; z-index: 2; float: left;
+      margin-right: 16px; padding-bottom: 8px;
+    }
+    body.reddit-mode .hero-avatar {
+      width: 72px; height: 72px;
+      border: 4px solid #fff;
+      border-radius: 50%; box-shadow: none;
+      background: var(--rd-orange);
+    }
+    body.reddit-mode .hero-avatar-ring { display: none; }
+    body.reddit-mode .hero-inner > div:first-child { padding-top: 8px; overflow: hidden; }
+    /* subreddit name & join row */
+    body.reddit-mode h1 {
+      font-size: 1.5rem !important; font-weight: 700 !important;
+      letter-spacing: 0 !important; line-height: 1.2 !important;
+      margin-bottom: 2px !important;
+    }
+    body.reddit-mode h1 span {
+      background: none !important; -webkit-text-fill-color: var(--rd-text) !important;
+      color: var(--rd-text) !important;
+    }
+    body.reddit-mode .hero-tag { display: none !important; }
+    body.reddit-mode .hero-sub {
+      font-size: 0.8rem; color: var(--rd-muted);
+      margin-bottom: 8px; max-width: 600px; line-height: 1.5;
+    }
+    body.reddit-mode .hero-ctas { gap: 8px; flex-wrap: wrap; margin-bottom: 0; }
+    body.reddit-mode .btn-primary {
+      background: var(--rd-blue) !important; color: #fff !important; box-shadow: none !important;
+      border-radius: 20px !important; font-size: 0.8rem !important; font-weight: 700 !important;
+      text-transform: capitalize !important; letter-spacing: 0 !important; padding: 6px 18px !important;
+    }
+    body.reddit-mode .btn-primary:hover { background: #006cbf !important; transform: none !important; box-shadow: none !important; color: #fff !important; }
+    body.reddit-mode .btn-outline {
+      border: 1px solid var(--rd-blue) !important; color: var(--rd-blue) !important;
+      border-radius: 20px !important; font-size: 0.8rem !important; font-weight: 700 !important;
+      text-transform: capitalize !important; padding: 6px 18px !important; background: none !important;
+    }
+    body.reddit-mode .btn-outline:hover { background: rgba(0,121,211,0.08) !important; color: var(--rd-blue) !important; }
+    /* Subreddit stats bar */
+    body.reddit-mode .hero-stats {
+      border-top: 1px solid var(--rd-border);
+      margin-top: 12px; padding-top: 12px; gap: 24px;
+      clear: both;
+    }
+    body.reddit-mode .stat-num { font-size: 1rem; font-weight: 700; color: var(--rd-text); }
+    body.reddit-mode .stat-lbl { font-size: 0.7rem; color: var(--rd-muted); text-transform: none; letter-spacing: 0; margin-top: 0; }
+
+    /* ── Reddit page layout: feed + sidebar ── */
+    body.reddit-mode section {
+      padding: 0; background: var(--rd-bg);
+    }
+    body.reddit-mode section:first-of-type { padding-top: 0; }
+
+    /* Feed wrapper for all content sections */
+    body.reddit-mode #pillars .pillars-grid,
+    body.reddit-mode #achievements .achievements-inner,
+    body.reddit-mode #campaigns .campaigns-inner,
+    body.reddit-mode #quotes .quotes-inner,
+    body.reddit-mode #interviews .interviews-inner,
+    body.reddit-mode #contact .contact-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    /* Section headers become subreddit post-list headers */
+    body.reddit-mode .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--rd-muted); text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    body.reddit-mode h2.section-title {
+      font-size: 1.125rem; font-weight: 700;
+      color: var(--rd-text); letter-spacing: 0; margin-bottom: 4px;
+    }
+    body.reddit-mode .section-intro { font-size: 0.8rem; color: var(--rd-muted); margin-bottom: 12px; }
+
+    /* Sort bar above feed */
+    body.reddit-mode #pillars .pillars-grid::before,
+    body.reddit-mode #achievements .timeline::before,
+    body.reddit-mode #campaigns .campaigns-grid::before,
+    body.reddit-mode #quotes .quotes-grid::before,
+    body.reddit-mode #interviews .interviews-grid::before {
+      content: none;
+    }
+    /* Sort pill bar injected before each section's grid */
+    body.reddit-mode .rd-sort-bar {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 0.85rem; font-weight: 700; color: var(--rd-muted);
+    }
+    body.reddit-mode .rd-sort-bar span { padding: 4px 8px; border-radius: 2px; cursor: default; }
+    body.reddit-mode .rd-sort-bar span.active { background: var(--rd-bg); color: var(--rd-blue); }
+
+    /* ── Reddit Post Card (universal) ── */
+    .reddit-post {
+      display: flex; flex-direction: row;
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px;
+      cursor: pointer; overflow: hidden;
+    }
+    body.reddit-mode .reddit-post:hover { border-color: #898989; }
+    /* Vote column */
+    .rp-vote {
+      width: 40px; min-width: 40px;
+      background: var(--rd-vote-bg);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 8px 4px; gap: 2px;
+      font-size: 0.7rem; font-weight: 700; color: var(--rd-muted);
+      flex-shrink: 0;
+    }
+    .rp-vote-up { font-size: 1.1rem; color: var(--rd-muted); line-height: 1; cursor: pointer; }
+    .rp-vote-up:hover, .rp-vote-up.active { color: var(--rd-orange); }
+    .rp-vote-count { font-size: 0.7rem; font-weight: 700; color: var(--rd-text); }
+    .rp-vote-down { font-size: 1.1rem; color: var(--rd-muted); line-height: 1; cursor: pointer; }
+    .rp-vote-down:hover { color: #7193FF; }
+    /* Post body */
+    .rp-body { padding: 8px; flex: 1; min-width: 0; }
+    .rp-meta { font-size: 0.72rem; color: var(--rd-muted); margin-bottom: 6px; line-height: 1.4; }
+    .rp-meta a { color: var(--rd-blue); font-weight: 700; text-decoration: none; }
+    .rp-meta a:hover { text-decoration: underline; }
+    .rp-title { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 6px; line-height: 1.3; }
+    .rp-flair {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      background: rgba(255,69,0,0.1); color: var(--rd-orange);
+      border-radius: 2px; padding: 1px 6px; margin-bottom: 6px;
+    }
+    .rp-selftext { font-size: 0.875rem; color: var(--rd-text); line-height: 1.6; margin-bottom: 8px; }
+    .rp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .rp-tag {
+      background: rgba(0,121,211,0.08); border: 1px solid rgba(0,121,211,0.2);
+      color: var(--rd-blue); border-radius: 12px;
+      font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
+    }
+    /* Action bar */
+    .rp-actions { display: flex; gap: 4px; flex-wrap: wrap; }
+    .rp-action {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.75rem; font-weight: 700; color: var(--rd-muted);
+      padding: 6px 8px; border-radius: 2px; cursor: pointer;
+    }
+    .rp-action:hover { background: var(--rd-bg); color: var(--rd-text); }
+    /* Thumbnail on right for link posts */
+    .rp-thumb {
+      width: 128px; min-width: 128px; max-width: 128px;
+      margin: 8px 8px 8px 0; border-radius: 4px; overflow: hidden;
+      align-self: flex-start; flex-shrink: 0;
+    }
+    .rp-thumb iframe { width: 100%; height: 80px; border: none; pointer-events: none; display: block; }
+    .rp-thumb img { width: 100%; height: 80px; object-fit: cover; display: block; }
+
+    /* ── Comment card (testimonials) ── */
+    .reddit-comment {
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px;
+      padding: 8px;
+    }
+    body.reddit-mode .reddit-comment:hover { border-color: #898989; }
+    .rc-header { font-size: 0.72rem; color: var(--rd-muted); margin-bottom: 6px; }
+    .rc-header strong { color: var(--rd-blue); font-weight: 700; }
+    .rc-body { font-size: 0.875rem; color: var(--rd-text); line-height: 1.7; border-left: 2px solid var(--rd-border); padding-left: 8px; }
+    .rc-actions { display: flex; align-items: center; gap: 4px; margin-top: 8px; }
+    .rc-action {
+      font-size: 0.72rem; font-weight: 700; color: var(--rd-muted);
+      padding: 4px 6px; border-radius: 2px; cursor: pointer;
+    }
+    .rc-action:hover { background: var(--rd-bg); color: var(--rd-text); }
+    .rc-vote { display: flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 700; color: var(--rd-muted); }
+    .rc-vote-up { cursor: pointer; font-size: 0.9rem; }
+    .rc-vote-up:hover { color: var(--rd-orange); }
+
+    /* ── Sidebar widget ── */
+    .rd-sidebar {
+      width: 312px; min-width: 312px; flex-shrink: 0;
+    }
+    .rd-widget {
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 16px; overflow: hidden;
+    }
+    .rd-widget-header {
+      background: var(--rd-orange); color: #fff;
+      padding: 10px 12px; font-size: 0.8rem; font-weight: 700;
+    }
+    .rd-widget-body { padding: 12px; font-size: 0.8rem; }
+    .rd-widget-body p { color: var(--rd-text); margin-bottom: 8px; line-height: 1.5; }
+    .rd-widget-stat { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .rd-widget-stat-num { font-weight: 700; font-size: 0.9rem; }
+    .rd-widget-stat-lbl { font-size: 0.72rem; color: var(--rd-muted); }
+    .rd-widget-divider { height: 1px; background: var(--rd-border); margin: 8px 0; }
+    .rd-widget-btn {
+      display: block; width: 100%; text-align: center;
+      background: var(--rd-blue); color: #fff;
+      border-radius: 20px; padding: 6px; font-size: 0.8rem; font-weight: 700;
+      text-decoration: none; margin-top: 8px; cursor: pointer; border: none;
+    }
+    .rd-widget-btn:hover { background: #006cbf; color: #fff; text-decoration: none; }
+    .rd-widget-btn.outline {
+      background: none; border: 1px solid var(--rd-blue); color: var(--rd-blue);
+      margin-top: 6px;
+    }
+    .rd-widget-btn.outline:hover { background: rgba(0,121,211,0.08); color: var(--rd-blue); }
+    .rd-rule { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--rd-border); font-size: 0.8rem; align-items: flex-start; }
+    .rd-rule-num { font-weight: 700; color: var(--rd-text); min-width: 16px; }
+    .rd-rule-text { color: var(--rd-text); }
+
+    /* ── Feed layout: main column + sidebar ── */
+    .rd-feed-layout {
+      display: flex; gap: 24px; align-items: flex-start;
+      max-width: 1200px; margin: 0 auto; padding: 20px 24px;
+    }
+    .rd-feed-main { flex: 1; min-width: 0; }
+
+    /* ── Pillars as post cards ── */
+    body.reddit-mode #pillars { background: var(--rd-bg); }
+    body.reddit-mode .pillars-grid { display: block !important; }
+    body.reddit-mode .pillar-card {
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
+    }
+    body.reddit-mode .pillar-card:hover { border-color: #898989; }
+    body.reddit-mode .pillar-icon { display: none; }
+    body.reddit-mode .pillar-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 4px; }
+    body.reddit-mode .pillar-card p { font-size: 0.875rem; color: var(--rd-text); line-height: 1.6; margin: 0; }
+
+    /* ── Achievements ── */
+    body.reddit-mode #achievements { background: var(--rd-bg); }
+    body.reddit-mode .achievements-inner { max-width: none !important; }
+    body.reddit-mode .timeline { padding-left: 0; }
+    body.reddit-mode .timeline::before { display: none; }
+    body.reddit-mode .tl-dot { display: none; }
+    body.reddit-mode .tl-item {
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
+    }
+    body.reddit-mode .tl-item:hover { border-color: #898989; }
+    body.reddit-mode .tl-header { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; }
+    body.reddit-mode .tl-company { color: var(--rd-blue); font-weight: 700; font-size: 0.72rem; }
+    body.reddit-mode .tl-company::before { content: 'r/'; }
+    body.reddit-mode .tl-period { font-size: 0.72rem; color: var(--rd-muted); font-weight: 400; }
+    body.reddit-mode .tl-role { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 4px; line-height: 1.3; }
+    body.reddit-mode .tl-desc { font-size: 0.875rem; color: var(--rd-text); line-height: 1.6; margin-bottom: 8px; }
+    body.reddit-mode .tl-metrics { display: flex; gap: 6px; flex-wrap: wrap; }
+    body.reddit-mode .tl-metric {
+      background: rgba(0,121,211,0.08) !important;
+      border: 1px solid rgba(0,121,211,0.2) !important; color: var(--rd-blue) !important;
+      border-radius: 12px; font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
+    }
+
+    /* ── Campaigns ── */
+    body.reddit-mode #campaigns { background: var(--rd-bg); }
+    body.reddit-mode .campaigns-grid { display: block !important; }
+    body.reddit-mode .campaign-card {
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
+    }
+    body.reddit-mode .campaign-card:hover { border-color: #898989; }
+    body.reddit-mode .campaign-thumb {
+      width: 128px; min-width: 128px; max-width: 128px;
+      order: 3; margin: 8px 8px 8px 0;
+      border-radius: 4px; overflow: hidden; flex-shrink: 0; align-self: flex-start;
+      aspect-ratio: unset; height: 80px;
+    }
+    body.reddit-mode .campaign-thumb iframe { width: 100%; height: 80px; border: none; pointer-events: none; }
+    body.reddit-mode .campaign-body { order: 2; padding: 8px; flex: 1; min-width: 0; }
+    body.reddit-mode .campaign-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 6px; line-height: 1.3; }
+    body.reddit-mode .campaign-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      background: rgba(255,69,0,0.1) !important; color: var(--rd-orange) !important;
+      border: none !important; border-radius: 2px; padding: 1px 6px; margin-bottom: 6px;
+    }
+    body.reddit-mode .campaign-desc { font-size: 0.875rem; color: var(--rd-text); line-height: 1.5; margin-bottom: 8px; }
+    body.reddit-mode .campaign-impact { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    body.reddit-mode .campaign-impact span {
+      background: rgba(0,121,211,0.08) !important; border: 1px solid rgba(0,121,211,0.2) !important;
+      color: var(--rd-blue) !important; border-radius: 12px;
+      font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
+    }
+    body.reddit-mode .campaign-link {
+      font-size: 0.75rem; font-weight: 700; color: var(--rd-muted);
+      text-transform: none; padding: 6px 8px; border-radius: 2px; margin-top: 0;
+    }
+    body.reddit-mode .campaign-link:hover { background: var(--rd-bg); color: var(--rd-text); text-decoration: none; }
+
+    /* ── Quotes as comment thread ── */
+    body.reddit-mode #quotes { background: var(--rd-bg); }
+    body.reddit-mode .quotes-grid { display: block !important; }
+    body.reddit-mode .quote-card {
+      all: unset;
+      display: block;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; padding: 8px;
+    }
+    body.reddit-mode .quote-card:hover { border-color: #898989; }
+    body.reddit-mode .quote-mark { display: none; }
+    body.reddit-mode .quote-text { font-size: 0.875rem; color: var(--rd-text); line-height: 1.7; font-style: normal; border-left: 2px solid var(--rd-border); padding-left: 8px; }
+    body.reddit-mode .quote-author { border-top: none; padding-top: 0; gap: 6px; margin-top: 8px; align-items: center; }
+    body.reddit-mode .quote-avatar { background: var(--rd-orange); width: 20px; height: 20px; font-size: 0.55rem; border-radius: 50%; flex-shrink: 0; }
+    body.reddit-mode .quote-author-name { color: var(--rd-blue); font-size: 0.72rem; font-weight: 700; }
+    body.reddit-mode .quote-author-role { font-size: 0.72rem; color: var(--rd-muted); }
+    body.reddit-mode .quote-card::after {
+      content: '▲ Upvote  💬 Reply  🔗 Share  ⚑ Report';
+      display: flex; font-size: 0.72rem; font-weight: 700;
+      color: var(--rd-muted); margin-top: 8px; gap: 4px;
+    }
+    body.reddit-mode .quotes-see-all-link { color: var(--rd-blue); border-bottom-color: var(--rd-blue); font-size: 0.8rem; }
+
+    /* ── Interviews ── */
+    body.reddit-mode #interviews { background: var(--rd-bg); }
+    body.reddit-mode .interviews-grid { display: block !important; }
+    body.reddit-mode .interview-card {
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
+    }
+    body.reddit-mode .interview-card:hover { border-color: #898989; }
+    body.reddit-mode .interview-thumb {
+      width: 128px; min-width: 128px; max-width: 128px;
+      height: 80px; order: 3; margin: 8px 8px 8px 0;
+      border-radius: 4px; overflow: hidden; flex-shrink: 0;
+      align-self: flex-start; font-size: 0; background: #000;
+      aspect-ratio: unset; position: relative;
+    }
+    body.reddit-mode .interview-thumb iframe { width: 100%; height: 80px; border: none; pointer-events: none; position: absolute; inset: 0; }
+    body.reddit-mode .interview-thumb img { width: 100%; height: 80px; object-fit: cover; }
+    body.reddit-mode .interview-body { order: 2; padding: 8px; flex: 1; min-width: 0; gap: 4px; }
+    body.reddit-mode .interview-badge {
+      background: rgba(255,69,0,0.1) !important; border: none !important;
+      color: var(--rd-orange) !important; font-size: 0.7rem; border-radius: 2px; padding: 1px 6px;
+    }
+    body.reddit-mode .interview-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); line-height: 1.3; margin-bottom: 4px; }
+    body.reddit-mode .interview-meta { font-size: 0.72rem; color: var(--rd-muted); }
+    body.reddit-mode .interview-link { color: var(--rd-muted); font-size: 0.75rem; font-weight: 700; text-transform: none; padding: 6px 8px; border-radius: 2px; margin-top: 4px; }
+    body.reddit-mode .interview-link:hover { background: var(--rd-bg); color: var(--rd-text); text-decoration: none; }
+    body.reddit-mode .interview-highlights span { background: var(--rd-vote-bg); border-color: var(--rd-border); color: var(--rd-muted); font-size: 0.7rem; }
+    /* CTA card */
+    body.reddit-mode .interview-card[style*="dashed"] {
+      background: var(--rd-white) !important;
+      border: 1px solid var(--rd-border) !important;
+      border-radius: 4px !important; justify-content: center;
+      padding: 20px; text-align: center; flex-direction: column;
+    }
+
+    /* ── Contact ── */
+    body.reddit-mode #contact { background: var(--rd-bg); }
+    body.reddit-mode .contact-inner { max-width: 740px; }
+    body.reddit-mode input, body.reddit-mode textarea {
+      background: var(--rd-white); border: 1px solid var(--rd-border); color: var(--rd-text);
+      border-radius: 4px; font-size: 0.875rem;
+    }
+    body.reddit-mode input:focus, body.reddit-mode textarea:focus {
+      border-color: var(--rd-blue); box-shadow: 0 0 0 2px rgba(0,121,211,0.15);
+    }
+    body.reddit-mode label { color: var(--rd-text); font-size: 0.8rem; font-weight: 700; }
+    body.reddit-mode .btn-submit {
+      background: var(--rd-blue); box-shadow: none;
+      border-radius: 20px; font-size: 0.875rem; font-weight: 700;
+      text-transform: capitalize; letter-spacing: 0;
+    }
+    body.reddit-mode .btn-submit:hover { background: #006cbf; transform: none; box-shadow: none; }
+    body.reddit-mode .contact-also { background: var(--rd-white); border-color: var(--rd-border); border-radius: 4px; }
+
+    /* ── Footer ── */
+    body.reddit-mode footer {
+      background: var(--rd-white); border-top: 1px solid var(--rd-border);
+      color: var(--rd-muted); font-size: 0.72rem;
+    }
+    body.reddit-mode footer a { color: var(--rd-muted); }
+    body.reddit-mode footer a:hover { color: var(--rd-blue); }
+
+    /* ── Mobile: hide sidebar, stack layout ── */
+    @media (max-width: 960px) {
+      body.reddit-mode .rd-sidebar { display: none; }
+      body.reddit-mode .rd-feed-layout { flex-direction: column; padding: 12px; }
+      body.reddit-mode .nav-links { display: none !important; }
+      body.reddit-mode .nav-links.open { display: flex !important; flex-direction: column; position: absolute; top: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Asaph Schulman</div>
+    <div class="nav-links" id="nav-links">
+      <a href="#achievements" onclick="closeNav()">Track Record</a>
+      <a href="#campaigns" onclick="closeNav()">Campaigns</a>
+      <a href="#quotes" onclick="closeNav()">Testimonials</a>
+      <a href="#interviews" onclick="closeNav()">Interviews</a>
+      <a href="#contact" onclick="closeNav()">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="reddit-toggle-btn" id="reddit-toggle" aria-label="Toggle Reddit theme" aria-pressed="false" title="Switch to Reddit mode">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <circle cx="10" cy="11" r="7" fill="currentColor" opacity="0.15"/>
+          <circle cx="10" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="10" cy="9.5" r="3.5" fill="currentColor"/>
+          <circle cx="8.7" cy="9" r="0.6" fill="white"/>
+          <circle cx="11.3" cy="9" r="0.6" fill="white"/>
+          <path d="M8.5 11 Q10 12.2 11.5 11" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
+          <circle cx="7" cy="6.5" r="1.2" fill="currentColor"/>
+          <circle cx="13" cy="6.5" r="1.2" fill="currentColor"/>
+          <line x1="10" y1="6.5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="10" cy="4.5" r="0.8" fill="currentColor"/>
+        </svg>
+        r/
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag fade-up">CMO · Startup Builder · AI-Powered Marketer</div>
+        <h1 class="fade-up delay-1">
+          Building brands that<br/><span>break through the noise.</span>
+        </h1>
+        <p class="hero-sub fade-up delay-2">
+          Marketing leader who takes startups from 0 to 1 and beyond. Technical foundation, entrepreneurial mindset, and a genuine passion for creative thinking. I build global teams and iconic brands that win.
+        </p>
+        <div class="hero-ctas fade-up delay-3">
+          <a href="#contact" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Get In Touch
+          </a>
+          <a href="https://www.linkedin.com/in/asaphs/" target="_blank" rel="noopener" class="btn btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            View LinkedIn
+          </a>
+        </div>
+        <div class="hero-stats fade-up delay-4">
+          <div class="stat-item">
+            <div class="stat-num">20+</div>
+            <div class="stat-lbl">Years in Tech</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Acquisitions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">2M+</div>
+            <div class="stat-lbl">Users Reached</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">180</div>
+            <div class="stat-lbl">Countries</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-avatar-wrap fade-up delay-2">
+        <div class="hero-avatar"><img src="asaph-photo.jpg" alt="Asaph Schulman" onerror="this.style.display='none'" /></div>
+        <div class="hero-avatar-ring"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PILLARS -->
+  <section id="pillars">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="section-label">What I bring</div>
+      <h2 class="section-title">A rare combination<br/>of skills</h2>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">🚀</div>
+          <h3>0 → 1 Startup Builder</h3>
+          <p>From day one through hypergrowth, I've built and scaled multiple tech companies across cybersecurity, fintech, and data, navigating every stage with speed and precision.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🧠</div>
+          <h3>Out-of-the-Box Thinker</h3>
+          <p>I turn bold, unconventional ideas into measurable results. From 8-bit games and love songs for engineers to campaigns that people genuinely talk about.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🌍</div>
+          <h3>Global Team Builder</h3>
+          <p>I've grown and led large international teams across multiple continents, building cultures where creativity, accountability, and performance thrive together.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🤖</div>
+          <h3>AI-Powered Marketer</h3>
+          <p>I embrace and leverage AI tools to amplify creativity, accelerate execution, and deliver marketing output that punches above its weight.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🎨</div>
+          <h3>Brand Creator</h3>
+          <p>I've led full rebranding initiatives and category creation from scratch, crafting narratives that shift markets and elevate companies into thought leaders.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🤝</div>
+          <h3>Proven People Leader</h3>
+          <p>I lead with empathy and high standards, with a genuine ability to hear what's not being said and respond in ways that make people grow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS TIMELINE -->
+  <section id="achievements">
+    <div class="achievements-inner">
+      <div class="section-label">Track Record</div>
+      <h2 class="section-title">Achievements that speak<br/>for themselves</h2>
+      <p class="section-intro" style="margin-bottom:3rem;">A career built on turning ambitious visions into market-defining realities.</p>
+
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-header">
+            <span class="tl-company">Firebolt</span>
+            <span class="tl-period">2019 – Present</span>
+          </div>
+          <div class="tl-role">CMO, Founding Marketing Leader</div>
+          <div class="tl-desc">Built the entire marketing engine from zero: brand, pipeline, content, events, and demand gen. Positioned Firebolt as the high-performance cloud data warehouse for builders of next-gen analytics experiences, with a distinct brand voice loved by hard-core engineers.</div>
+          <div class="tl-metrics">
+            <span class="tl-metric">6+ yrs as founding CMO</span>
+            <span class="tl-metric">Global team built from scratch</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-header">
+            <span class="tl-company">Coinmama</span>
+            <span class="tl-period">2017 – 2019</span>
+          </div>
+          <div class="tl-role">CEO, Simplifying Crypto for the Masses</div>
+          <div class="tl-desc">Led Coinmama to become one of the world's most customer-centric crypto exchanges, growing to 2M+ users across 180 countries during the most competitive period in crypto history. The company was subsequently acquired.</div>
+          <div class="tl-metrics">
+            <span class="tl-metric">2M+ users</span>
+            <span class="tl-metric">180 countries</span>
+            <span class="tl-metric">Strategic acquisition</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-header">
+            <span class="tl-company">Checkmarx</span>
+            <span class="tl-period">2011 – 2017</span>
+          </div>
+          <div class="tl-role">VP Marketing, 85× Growth &amp; $1.15B Acquisition</div>
+          <div class="tl-desc">Transformed Checkmarx from a small outbound startup into a Gartner Magic Quadrant "Leader" and Israel's fastest-growing cybersecurity company 3 years in a row (Deloitte Fast 50). Led the shift to inbound marketing and drove explosive growth before the company's $1.15B acquisition.</div>
+          <div class="tl-metrics">
+            <span class="tl-metric">85× revenue growth</span>
+            <span class="tl-metric">20× team scale-up</span>
+            <span class="tl-metric">$1.15B acquisition</span>
+            <span class="tl-metric">Gartner MQ Leader</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-header">
+            <span class="tl-company">Techie Talkie</span>
+            <span class="tl-period">2019 – 2022</span>
+          </div>
+          <div class="tl-role">Co-Founder &amp; Host, Tech Marketing Podcast</div>
+          <div class="tl-desc">Co-created and hosted Techie Talkie, featuring global marketing leaders sharing their most impactful trade secrets. 29 episodes, with guests from companies including Drift, Refine Labs, and Payoneer.</div>
+          <div class="tl-metrics">
+            <span class="tl-metric">29 episodes</span>
+            <span class="tl-metric">English &amp; Hebrew guests</span>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-header">
+            <span class="tl-company">ClearGiving</span>
+            <span class="tl-period">2019 – Present</span>
+          </div>
+          <div class="tl-role">Co-Founder, Peer-to-Peer Charity Platform</div>
+          <div class="tl-desc">Built a technology-driven charity platform where 100% of donated funds reach their destination, with full transparency on how money is used, including adopting specific families in need.</div>
+          <div class="tl-metrics">
+            <span class="tl-metric">100% funds reach recipients</span>
+            <span class="tl-metric">Tech for good</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESSFUL CAMPAIGNS -->
+  <section id="campaigns">
+    <div class="campaigns-inner">
+      <div class="section-label">Creative Work</div>
+      <h2 class="section-title">Campaigns that broke<br/>through the noise</h2>
+      <p class="section-intro">Unconventional ideas turned into marketing moments people still talk about.</p>
+
+      <div class="campaigns-grid">
+
+        <!-- World's Fastest Demo -->
+        <div class="campaign-card">
+          <div class="campaign-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/-hR7Qzf_8X4"
+              title="The World's Fastest Demo – Firebolt"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy">
+            </iframe>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(79,142,247,0.12);border:1px solid rgba(79,142,247,0.3);color:var(--accent);">⚡ YouTube Ad</div>
+            <h3>The World's Fastest Demo</h3>
+            <p class="campaign-desc">We had one shot — 5 seconds before the skip button. So we built a demo that proved Firebolt's speed in the exact time it took to read the headline. Product value delivered before the viewer could opt out.</p>
+            <div class="campaign-impact">
+              <span>5-sec proof of value</span>
+              <span>Pre-skip hook</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=-hR7Qzf_8X4" target="_blank" rel="noopener" class="campaign-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Big Data Game -->
+        <div class="campaign-card">
+          <div class="campaign-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/BGNj6gCTwyY"
+              title="The Big Data Game | Trailer | Firebolt"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy">
+            </iframe>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);color:#a78bfa;">🕹️ Interactive Game</div>
+            <h3>The Big Data Game</h3>
+            <p class="campaign-desc">A full 8-bit browser game where a data engineer battles the pains of managing pipelines. Cameos from Snowflake, Databricks, AWS, and more. Our competitors even mentioned it — the ultimate signal it worked.</p>
+            <div class="campaign-impact">
+              <span>Tens of thousands of plays</span>
+              <span>Mentioned by competitors</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=BGNj6gCTwyY" target="_blank" rel="noopener" class="campaign-link">
+              Watch trailer
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+            <a href="https://www.firebolt.io/big-data-game" target="_blank" rel="noopener" class="campaign-link" style="margin-top:0; font-size:0.78rem; color:var(--muted);">
+              Play the game
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Data Engineering Love Song -->
+        <div class="campaign-card">
+          <div class="campaign-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/CkmtkeNqOcA"
+              title="The Data Engineering Love Song | Valentine's | Firebolt"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy">
+            </iframe>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#f87171;">❤️ Valentine's Day</div>
+            <h3>The Data Engineering Love Song</h3>
+            <p class="campaign-desc">For Valentine's Day, we stitched together the most candid, honest, and occasionally cringe-worthy things engineers said about data — all sourced directly from real Gong call recordings. Authentic, human, and impossible to ignore.</p>
+            <div class="campaign-impact">
+              <span>Made from real Gong calls</span>
+              <span>Viral within the community</span>
+            </div>
+            <a href="https://www.youtube.com/watch?v=CkmtkeNqOcA" target="_blank" rel="noopener" class="campaign-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Data Engineering Show -->
+        <div class="campaign-card">
+          <div class="campaign-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/QSvW-_FGE_M"
+              title="The Data Engineering Show – Sample Episode"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy">
+            </iframe>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-badge" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);color:#34d399;">📺 Videocast / Podcast</div>
+            <h3>The Data Engineering Show</h3>
+            <p class="campaign-desc">A top-ranked podcast and videocast for data practitioners, with 42.9K+ subscribers and thousands of listeners per episode. Guests included engineering leaders from Stripe, LinkedIn, Lyft, Uber, Databricks, and more — real talk, no fluff.</p>
+            <div class="campaign-impact">
+              <span>42.9K+ subscribers</span>
+              <span>Stripe · LinkedIn · Lyft · Uber</span>
+            </div>
+            <a href="https://www.youtube.com/@thedataengineeringshow" target="_blank" rel="noopener" class="campaign-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+            <a href="https://www.dataengineeringshow.com/" target="_blank" rel="noopener" class="campaign-link" style="margin-top:0; font-size:0.78rem; color:var(--muted);">
+              Visit website
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES / TESTIMONIALS -->
+  <section id="quotes">
+    <div class="quotes-inner">
+      <div class="section-label">What People Say</div>
+      <h2 class="section-title">Don't take my word<br/>for it</h2>
+      <p class="section-intro">From LinkedIn recommendations by people who've worked closely with me.</p>
+
+      <div class="quotes-grid">
+
+        <div class="quote-card">
+          <div class="quote-mark">"</div>
+          <div class="quote-text">Asaph is the kind of person who will build a team of 18 marketers from scratch, envision a crazy idea and make it happen, overperform and still remain humble about it. When it comes to Asaph, there are no rules and everything is possible through creativity and passion. Asaph never compromises on quality and has the ability of pushing the team to the extreme while maintaining motivation and good energies. Asaph is the real deal when it comes to Marketing, Business and Management.</div>
+          <div class="quote-author">
+            <div class="quote-avatar">CR</div>
+            <div>
+              <div class="quote-author-name">Caroline Rosenberg</div>
+              <div class="quote-author-role">Emerging Tech Cyber CMO · reported directly to Asaph at Checkmarx</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-mark">"</div>
+          <div class="quote-text">We hired Asaph when we had very little marketing and he transformed Checkmarx from an analog company to the digital age. Within one year he shifted our entire sales operation from outbound to inbound, creating a lead generation machine. Above all, Asaph is a leader that people like. Very few people have this secret sauce that enables them to achieve goals while keeping everybody happy.</div>
+          <div class="quote-author">
+            <div class="quote-avatar">ML</div>
+            <div>
+              <div class="quote-author-name">Moshe Lerner</div>
+              <div class="quote-author-role">Chief Strategist at Checkmarx · senior to Asaph</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-mark">"</div>
+          <div class="quote-text">Asaph mastered every aspect of his role, and drove the company's marketing strategy from the days it was a small startup until the company had almost 400 employees. It is Asaph's unique personality which combines humbleness, sharpness, and passion that makes him an ideal management member for every company. Asaph is a rare specie that can make a difference everywhere he goes.</div>
+          <div class="quote-author">
+            <div class="quote-avatar">NL</div>
+            <div>
+              <div class="quote-author-name">Nir Livni</div>
+              <div class="quote-author-role">Head of Product Management, Cloud Security · worked with Asaph at Checkmarx</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="quotes-see-all">
+        <a href="https://www.linkedin.com/in/asaphs/details/recommendations/" target="_blank" rel="noopener" class="quotes-see-all-link">See all recommendations →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERVIEWS -->
+  <section id="interviews">
+    <div class="interviews-inner">
+      <div class="section-label">In the Spotlight</div>
+      <h2 class="section-title">Podcasts &amp; Interviews</h2>
+      <p class="section-intro">Featured conversations with leading marketers and entrepreneurs, on the Techie Talkie podcast and beyond.</p>
+
+      <div class="interviews-grid">
+
+        <!-- E24: Dave Gerhardt -->
+        <div class="interview-card">
+          <div class="interview-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/t27ZKSwRDLE"
+              title="Techie Talkie E24 – How to be a B2B Marketing leader with Dave Gerhardt"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <div class="interview-body">
+            <div class="interview-badge">Techie Talkie · E24</div>
+            <h3>How to be a B2B Marketing Leader, with Dave Gerhardt</h3>
+            <div class="interview-meta">English · 51 min · Dave Gerhardt (Drift / Exit Five)</div>
+            <a href="https://www.youtube.com/watch?v=t27ZKSwRDLE" target="_blank" rel="noopener" class="interview-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- E27: Chris Walker -->
+        <div class="interview-card">
+          <div class="interview-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/YLs4BR7i4RM"
+              title="Techie Talkie E27 – How to capture demand and create demand at scale with Chris Walker"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <div class="interview-body">
+            <div class="interview-badge">Techie Talkie · E27</div>
+            <h3>How to Capture Demand and Create Demand at Scale, with Chris Walker</h3>
+            <div class="interview-meta">English · 46 min · Chris Walker (Refine Labs)</div>
+            <a href="https://www.youtube.com/watch?v=YLs4BR7i4RM" target="_blank" rel="noopener" class="interview-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- E15: Jonny Steel, Payoneer -->
+        <div class="interview-card">
+          <div class="interview-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/NMWUhdq17mU"
+              title="Techie Talkie E15 – How to Build an Outstanding Brand with Jonny Steel"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <div class="interview-body">
+            <div class="interview-badge">Techie Talkie · E15</div>
+            <h3>How to Build an Outstanding Brand, with Jonny Steel (Payoneer VP Marketing)</h3>
+            <div class="interview-meta">English · 52 min · Jonny Steel (Payoneer)</div>
+            <a href="https://www.youtube.com/watch?v=NMWUhdq17mU" target="_blank" rel="noopener" class="interview-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- E13: Lisa Bennett, Cultura -->
+        <div class="interview-card">
+          <div class="interview-thumb">
+            <iframe
+              src="https://www.youtube.com/embed/SVBTzO8lfvs"
+              title="Techie Talkie E13 – How to work with analysts with Lisa Bennett"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <div class="interview-body">
+            <div class="interview-badge">Techie Talkie · E13</div>
+            <h3>How to Work with Analysts and Achieve Exceptional Results, with Lisa Bennett</h3>
+            <div class="interview-meta">English · 38 min · Lisa Bennett (Kaltura)</div>
+            <a href="https://www.youtube.com/watch?v=SVBTzO8lfvs" target="_blank" rel="noopener" class="interview-link">
+              Watch on YouTube
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Ariel Sterman: Apple Podcasts -->
+        <div class="interview-card">
+          <div class="interview-thumb" style="background:#000;">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/1d/33/2a/1d332ae6-b6b4-3304-c079-3d52ad8f8246/mza_2458454435050929287.jpg/1200x1200bf.webp"
+                 alt="Taking on Cloud Giants – Bessemer Venture Partners"
+                 style="width:100%;height:100%;object-fit:cover;display:block;" />
+          </div>
+          <div class="interview-body">
+            <div class="interview-badge" style="background:rgba(252,60,68,0.12);border-color:rgba(252,60,68,0.25);color:#fc3c44;">
+              <span style="width:5px;height:5px;border-radius:50%;background:#fc3c44;display:block;"></span>
+              Podcast Interview
+            </div>
+            <h3>Taking on Cloud Giants: Asaph Schulman, CMO at Firebolt</h3>
+            <div class="interview-meta">English · Ariel Sterman · Firebolt's brand story</div>
+            <a href="https://podcasts.apple.com/us/podcast/taking-on-cloud-giants-asaph-schulman-cmo-firebolt/id1615282515?i=1000554622001" target="_blank" rel="noopener" class="interview-link">
+              Listen on Apple Podcasts
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Eytan Buchman: Marketers In Capes podcast -->
+        <div class="interview-card">
+          <div class="interview-thumb" style="background:#000;">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/7f/de/07/7fde07f1-d854-84e0-2887-261f049397a6/mza_10467436113162955345.jpg/1200x1200bf.webp"
+                 alt="Marketers In Capes – Eytan Buchman"
+                 style="width:100%;height:100%;object-fit:cover;display:block;" />
+          </div>
+          <div class="interview-body">
+            <div class="interview-badge" style="background:rgba(100,200,255,0.1);border-color:rgba(100,200,255,0.2);color:#7dd3fc;">
+              <span style="width:5px;height:5px;border-radius:50%;background:#7dd3fc;display:block;"></span>
+              Marketers In Capes · S3 Ep. 12
+            </div>
+            <h3>Asaph Schulman, CMO at Firebolt: Brand Strategy at Scale</h3>
+            <div class="interview-meta">English · 17 min · Eytan Buchman</div>
+            <div class="interview-highlights">
+              <span>Brand voice alignment</span>
+              <span>SEO via competitor errors</span>
+              <span>Benchmarking Snowflake & GCP</span>
+              <span>Hiring for hustle</span>
+            </div>
+            <a href="https://podcasts.apple.com/us/podcast/asaph-schulman-cmo-firebolt/id1353391360?i=1000590517945" target="_blank" rel="noopener" class="interview-link">
+              Listen on Apple Podcasts
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+            <a href="https://www.buchman.co.il/asaph-schulman-cmo-@-firebolt/" target="_blank" rel="noopener" class="interview-link" style="margin-top:0.1rem; font-size:0.78rem; color:var(--muted);">
+              Read article
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Full channel CTA card -->
+        <div class="interview-card" style="justify-content:center; align-items:center; text-align:center; padding:2rem; background: linear-gradient(135deg, rgba(79,142,247,0.08), rgba(124,58,237,0.08)); border: 1px dashed rgba(79,142,247,0.3);">
+          <div style="font-size:3rem; margin-bottom:1rem;">🎙️</div>
+          <h3 style="font-size:1rem; margin-bottom:0.5rem;">See All 29 Episodes</h3>
+          <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.25rem;">The full Techie Talkie library — featuring the world's best tech marketers sharing their most impactful trade secrets.</p>
+          <a href="https://www.youtube.com/@TechieTalkie/videos" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:0.85rem;">
+            Visit Techie Talkie Channel
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-label">Let's Talk</div>
+      <h2 class="section-title">Get in touch</h2>
+      <p class="section-intro">Whether you're building a startup, scaling a team, or looking for marketing leadership — I'd love to hear from you.</p>
+
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <!-- Formspree hidden fields -->
+        <input type="hidden" name="_subject" value="Asaph Schulman - Contact us form" />
+        <input type="hidden" name="_replyto" id="replyto-field" value="" />
+        <div class="contact-grid">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Jane" required />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Smith" required />
+          </div>
+          <div class="form-group full">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required oninput="document.getElementById('replyto-field').value=this.value" />
+          </div>
+          <div class="form-group full">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="What's on your mind?" required />
+          </div>
+          <div class="form-group full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me a bit about what you're working on..." required></textarea>
+          </div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-submit">Send Message →</button>
+        </div>
+        <div id="form-feedback" style="display:none; margin-top:0.75rem; padding:0.9rem 1rem; border-radius:8px; font-size:0.9rem; font-weight:600;"></div>
+      </form>
+
+      <div class="contact-also">
+        <div class="li-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </div>
+        <div class="contact-also-text">
+          <strong>Connect on LinkedIn</strong>
+          <span>12,500+ followers · 500+ connections</span>
+        </div>
+        <a href="https://www.linkedin.com/in/asaphs/" target="_blank" rel="noopener" class="btn btn-outline" style="margin-left:auto; white-space:nowrap;">View Profile →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Asaph Schulman · <a href="https://www.linkedin.com/in/asaphs/" target="_blank" rel="noopener">linkedin.com/in/asaphs</a></p>
+  </footer>
+
+  <script>
+    // ── Reddit Mode Toggle ──
+    (function() {
+      const STORAGE_KEY = 'reddit-mode';
+      const REDDIT_TEXT = {
+        'Years in Tech':   'Members Online',
+        'Acquisitions':    'Top Awards',
+        'Users Reached':   'Total Members',
+        'Countries':       'Communities',
+        'What I bring':    'r/AsaphSkills',
+        'Track Record':    'r/AsaphCareer',
+        'Creative Work':   'r/AsaphCampaigns',
+        'What People Say': 'r/AsaphTestimonials',
+        'In the Spotlight':'r/AsaphInterviews',
+        "Let's Talk":      'r/AsaphContact',
+      };
+
+      // vote counts per card (stable random seeded by index)
+      function voteCount(i) { return [2847,1923,4102,987,3311,1654,2209,876,3089,1432,2756,543][i % 12]; }
+      function commentCount(i) { return [247,89,412,134,298,67,189,45,321,178,234,91][i % 12]; }
+
+      function buildVoteCol(votes) {
+        return `<div class="rp-vote"><span class="rp-vote-up" title="Upvote">▲</span><span class="rp-vote-count">${(votes/1000).toFixed(1)}k</span><span class="rp-vote-down" title="Downvote">▼</span></div>`;
+      }
+      function buildActions(comments, subreddit) {
+        return `<div class="rp-actions">
+          <span class="rp-action">💬 ${comments} Comments</span>
+          <span class="rp-action">🔗 Share</span>
+          <span class="rp-action">⭐ Save</span>
+          <span class="rp-action">••• More</span>
+        </div>`;
+      }
+      function buildSortBar() {
+        return `<div class="rd-sort-bar">
+          <span style="color:#FF4500;font-size:1rem;">🔥</span>
+          <span class="active">Hot</span>
+          <span>New</span>
+          <span>Top</span>
+          <span>Rising</span>
+        </div>`;
+      }
+      function buildSidebar() {
+        return `<aside class="rd-sidebar">
+          <div class="rd-widget">
+            <div class="rd-widget-header">📌 About r/AsaphSchulman</div>
+            <div class="rd-widget-body">
+              <p>The official subreddit for Asaph Schulman — CMO, startup builder, and marketing leader. Posts about campaigns, career wins, and the art of building brands people actually care about.</p>
+              <div class="rd-widget-divider"></div>
+              <div class="rd-widget-stat"><div><div class="rd-widget-stat-num">2M+</div><div class="rd-widget-stat-lbl">Members</div></div><div><div class="rd-widget-stat-num">247</div><div class="rd-widget-stat-lbl">Online</div></div></div>
+              <div class="rd-widget-divider"></div>
+              <div style="font-size:0.72rem;color:#878A8C;margin-bottom:8px;">🎂 Created Jan 2004 &nbsp;·&nbsp; 🌍 180 Countries</div>
+              <a class="rd-widget-btn" href="#contact">Message Asaph</a>
+              <a class="rd-widget-btn outline" href="https://www.linkedin.com/in/asaphs/" target="_blank">View LinkedIn</a>
+            </div>
+          </div>
+          <div class="rd-widget">
+            <div class="rd-widget-header" style="background:#0079D3;">📋 Subreddit Rules</div>
+            <div class="rd-widget-body">
+              <div class="rd-rule"><span class="rd-rule-num">1</span><span class="rd-rule-text">Be respectful and professional</span></div>
+              <div class="rd-rule"><span class="rd-rule-num">2</span><span class="rd-rule-text">No spam or self-promotion</span></div>
+              <div class="rd-rule"><span class="rd-rule-num">3</span><span class="rd-rule-text">Marketing talk encouraged</span></div>
+              <div class="rd-rule"><span class="rd-rule-num">4</span><span class="rd-rule-text">Data or it didn't happen</span></div>
+              <div class="rd-rule" style="border:none"><span class="rd-rule-num">5</span><span class="rd-rule-text">No fluff. Real talk only.</span></div>
+            </div>
+          </div>
+          <div class="rd-widget">
+            <div class="rd-widget-body" style="font-size:0.72rem;color:#878A8C;line-height:1.8;">
+              Help · About · Careers · Press<br>Blog · Rules · Privacy · Terms<br><br>
+              Reddit Inc © 2025. All rights reserved.
+            </div>
+          </div>
+        </aside>`;
+      }
+
+      function wrapInFeedLayout(section, feedHtml, hasSidebar) {
+        const existing = section.querySelector('.rd-feed-layout');
+        if (existing) { existing.innerHTML = ''; }
+        const layout = document.createElement('div');
+        layout.className = 'rd-feed-layout';
+        layout.innerHTML = `<div class="rd-feed-main">${feedHtml}</div>${hasSidebar ? buildSidebar() : ''}`;
+        // Move existing section children aside, insert layout
+        const inner = section.firstElementChild;
+        if (inner) section.insertBefore(layout, inner.nextSibling);
+      }
+
+      function injectRedditUI() {
+        // ── Pillar cards → Reddit posts ──
+        document.querySelectorAll('.pillar-card').forEach((card, i) => {
+          if (card.querySelector('.rp-vote')) return;
+          const h3 = card.querySelector('h3')?.textContent || '';
+          const p  = card.querySelector('p')?.textContent || '';
+          const icon = card.querySelector('.pillar-icon')?.textContent || '';
+          card.innerHTML = `
+            ${buildVoteCol(voteCount(i))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> in <a href="#">r/AsaphSkills</a></div>
+              <div class="rp-title">${icon} ${h3}</div>
+              <div class="rp-selftext">${p}</div>
+              ${buildActions(commentCount(i))}
+            </div>`;
+        });
+        // Add sort bar before pillars grid
+        const pg = document.querySelector('#pillars .pillars-grid');
+        if (pg && !pg.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          pg.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Timeline items → Reddit posts ──
+        document.querySelectorAll('.tl-item').forEach((item, i) => {
+          if (item.querySelector('.rp-vote')) return;
+          const company = item.querySelector('.tl-company')?.textContent || '';
+          const period  = item.querySelector('.tl-period')?.textContent || '';
+          const role    = item.querySelector('.tl-role')?.textContent || '';
+          const desc    = item.querySelector('.tl-desc')?.textContent || '';
+          const metrics = [...item.querySelectorAll('.tl-metric')].map(m => `<span class="rp-tag">${m.textContent}</span>`).join('');
+          item.innerHTML = `
+            ${buildVoteCol(voteCount(i+10))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> · <a href="#">r/${company.trim()}</a> · ${period}</div>
+              <div class="rp-flair">Career</div>
+              <div class="rp-title">${role}</div>
+              <div class="rp-selftext">${desc}</div>
+              <div class="rp-tags">${metrics}</div>
+              ${buildActions(commentCount(i+10))}
+            </div>`;
+        });
+        const tl = document.querySelector('#achievements .timeline');
+        if (tl && !tl.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          tl.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Campaign cards → Reddit link posts ──
+        document.querySelectorAll('.campaign-card').forEach((card, i) => {
+          if (card.querySelector('.rp-vote')) return;
+          const badge = card.querySelector('.campaign-badge')?.textContent?.trim() || '';
+          const h3    = card.querySelector('h3')?.textContent || '';
+          const desc  = card.querySelector('.campaign-desc')?.textContent || '';
+          const impacts = [...card.querySelectorAll('.campaign-impact span')].map(s => `<span class="rp-tag">${s.textContent}</span>`).join('');
+          const thumbHTML = card.querySelector('.campaign-thumb')?.innerHTML || '';
+          const links = [...card.querySelectorAll('.campaign-link')].map(a =>
+            `<a class="rp-action" href="${a.href}" target="_blank">${a.textContent.trim()}</a>`).join('');
+          card.innerHTML = `
+            ${buildVoteCol(voteCount(i+4))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> in <a href="#">r/AsaphCampaigns</a></div>
+              <span class="rp-flair">${badge}</span>
+              <div class="rp-title">${h3}</div>
+              <div class="rp-selftext">${desc}</div>
+              <div class="rp-tags">${impacts}</div>
+              <div class="rp-actions">${links}
+                <span class="rp-action">💬 ${commentCount(i+4)} Comments</span>
+                <span class="rp-action">🔗 Share</span>
+                <span class="rp-action">⭐ Save</span>
+              </div>
+            </div>
+            <div class="rp-thumb">${thumbHTML}</div>`;
+        });
+        const cg = document.querySelector('#campaigns .campaigns-grid');
+        if (cg && !cg.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          cg.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Quote cards → Reddit comments ──
+        document.querySelectorAll('.quote-card').forEach((card, i) => {
+          if (card.dataset.rdDone) return;
+          card.dataset.rdDone = '1';
+          const text   = card.querySelector('.quote-text')?.textContent || '';
+          const name   = card.querySelector('.quote-author-name')?.textContent || '';
+          const role   = card.querySelector('.quote-author-role')?.textContent || '';
+          const initials = card.querySelector('.quote-avatar')?.textContent || '??';
+          const votes  = voteCount(i+7);
+          card.innerHTML = `
+            <div class="rc-header">
+              <strong>u/${name.split(' ')[0]}${name.split(' ')[1]?.[0] || ''}</strong>
+              &nbsp;·&nbsp; ${role}
+              &nbsp;·&nbsp; ${Math.floor(Math.random()*12)+1}h ago
+            </div>
+            <div class="rc-body">${text}</div>
+            <div class="rc-actions">
+              <div class="rc-vote"><span class="rc-vote-up">▲</span>&nbsp;${Math.floor(votes/100)} points</div>
+              <span class="rc-action">💬 Reply</span>
+              <span class="rc-action">🔗 Share</span>
+              <span class="rc-action">⭐ Save</span>
+              <span class="rc-action">⚑ Report</span>
+            </div>`;
+        });
+        const qg = document.querySelector('#quotes .quotes-grid');
+        if (qg && !qg.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          qg.insertAdjacentHTML('beforebegin', `<div class="rd-sort-bar">
+            <span style="color:#0079D3;font-size:1rem;">💬</span>
+            <span class="active" style="color:#0079D3;">Best</span>
+            <span>Top</span><span>New</span><span>Controversial</span>
+          </div>`);
+        }
+
+        // ── Interview cards → link posts ──
+        document.querySelectorAll('.interview-card').forEach((card, i) => {
+          if (card.querySelector('.rp-vote')) return;
+          const badge = card.querySelector('.interview-badge')?.textContent?.trim() || '';
+          const h3    = card.querySelector('h3')?.textContent || '';
+          const meta  = card.querySelector('.interview-meta')?.textContent || '';
+          const link  = card.querySelector('.interview-link');
+          const href  = link?.href || '#';
+          const linkText = link?.textContent?.trim() || 'Watch';
+          const thumbHTML = card.querySelector('.interview-thumb')?.innerHTML || '';
+          const highlights = [...card.querySelectorAll('.interview-highlights span')].map(s => `<span class="rp-tag">${s.textContent}</span>`).join('');
+          card.innerHTML = `
+            ${buildVoteCol(voteCount(i+2))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> in <a href="#">r/AsaphInterviews</a></div>
+              <span class="rp-flair">${badge}</span>
+              <div class="rp-title">${h3}</div>
+              <div class="rp-selftext" style="color:#878A8C;font-size:0.8rem;">${meta}</div>
+              ${highlights ? `<div class="rp-tags">${highlights}</div>` : ''}
+              <div class="rp-actions">
+                <a class="rp-action" href="${href}" target="_blank">${linkText}</a>
+                <span class="rp-action">💬 ${commentCount(i+2)} Comments</span>
+                <span class="rp-action">🔗 Share</span>
+                <span class="rp-action">⭐ Save</span>
+              </div>
+            </div>
+            <div class="rp-thumb">${thumbHTML}</div>`;
+        });
+        const ig = document.querySelector('#interviews .interviews-grid');
+        if (ig && !ig.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          ig.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Inject sidebar as fixed right panel ──
+        if (!document.getElementById('rd-sidebar-fixed')) {
+          const sidebar = document.createElement('div');
+          sidebar.id = 'rd-sidebar-fixed';
+          sidebar.style.cssText = 'position:fixed;top:80px;right:24px;width:296px;z-index:50;max-height:calc(100vh - 100px);overflow-y:auto;';
+          sidebar.innerHTML = buildSidebar();
+          document.body.appendChild(sidebar);
+        }
+      }
+
+      function removeRedditUI() {
+        // Remove injected sort bars
+        document.querySelectorAll('.rd-sort-bar').forEach(el => el.remove());
+        // Remove injected feed layouts
+        document.querySelectorAll('.rd-feed-layout').forEach(el => el.remove());
+        // Pillar cards: restore original markup
+        document.querySelectorAll('.pillar-card').forEach(card => {
+          if (!card.querySelector('.rp-vote')) return;
+          card.dataset.rdRestored = '';
+        });
+        // We DON'T restore card innerHTML — page reload will reset.
+        // Instead, for a clean toggle we track state and reload if needed.
+      }
+
+      function applyMode(isReddit, initial) {
+        const body = document.body;
+        const btn  = document.getElementById('reddit-toggle');
+        body.classList.toggle('reddit-mode', isReddit);
+        btn.setAttribute('aria-pressed', String(isReddit));
+        btn.title   = isReddit ? 'Back to dark mode' : 'Switch to Reddit mode';
+        btn.innerHTML = isReddit
+          ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="11" r="7" fill="currentColor" opacity="0.15"/><circle cx="10" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9.5" r="3.5" fill="currentColor"/><circle cx="8.7" cy="9" r="0.6" fill="white"/><circle cx="11.3" cy="9" r="0.6" fill="white"/><path d="M8.5 11 Q10 12.2 11.5 11" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round"/><circle cx="7" cy="6.5" r="1.2" fill="currentColor"/><circle cx="13" cy="6.5" r="1.2" fill="currentColor"/><line x1="10" y1="6.5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="4.5" r="0.8" fill="currentColor"/></svg> Dark mode`
+          : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="11" r="7" fill="currentColor" opacity="0.15"/><circle cx="10" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9.5" r="3.5" fill="currentColor"/><circle cx="8.7" cy="9" r="0.6" fill="white"/><circle cx="11.3" cy="9" r="0.6" fill="white"/><path d="M8.5 11 Q10 12.2 11.5 11" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round"/><circle cx="7" cy="6.5" r="1.2" fill="currentColor"/><circle cx="13" cy="6.5" r="1.2" fill="currentColor"/><line x1="10" y1="6.5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="4.5" r="0.8" fill="currentColor"/></svg> r/`;
+
+        // Swap text labels
+        document.querySelectorAll('.stat-lbl, .section-label').forEach(el => {
+          if (isReddit) {
+            const mapped = REDDIT_TEXT[el.textContent.trim()];
+            if (mapped) { el.dataset.original = el.textContent; el.textContent = mapped; }
+          } else {
+            if (el.dataset.original) { el.textContent = el.dataset.original; delete el.dataset.original; }
+          }
+        });
+
+        if (isReddit) {
+          injectRedditUI();
+        } else if (!initial) {
+          // Reload to restore original card markup cleanly
+          localStorage.setItem(STORAGE_KEY, 'false');
+          window.location.reload();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const saved = localStorage.getItem(STORAGE_KEY) === 'true';
+        applyMode(saved, true);
+        document.getElementById('reddit-toggle').addEventListener('click', function() {
+          const next = !document.body.classList.contains('reddit-mode');
+          localStorage.setItem(STORAGE_KEY, String(next));
+          applyMode(next, false);
+        });
+      });
+    })();
+
+    function toggleNav() {
+      document.getElementById('nav-links').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    }
+    function closeNav() {
+      document.getElementById('nav-links').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const feedback = document.getElementById('form-feedback');
+      const btn = form.querySelector('.btn-submit');
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      const data = new FormData(form);
+
+      try {
+        const resp = await fetch('https://formspree.io/f/xeelnole', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        feedback.style.display = 'block';
+        if (resp.ok) {
+          feedback.style.background = 'rgba(79,142,247,0.1)';
+          feedback.style.border = '1px solid rgba(79,142,247,0.3)';
+          feedback.style.color = '#93c5fd';
+          feedback.textContent = '✓ Thanks! Your message has been sent. I\'ll get back to you soon.';
+          form.reset();
+        } else {
+          feedback.style.background = 'rgba(239,68,68,0.1)';
+          feedback.style.border = '1px solid rgba(239,68,68,0.3)';
+          feedback.style.color = '#f87171';
+          feedback.textContent = 'Oops — something went wrong. Please try again or reach out on LinkedIn.';
+        }
+      } catch {
+        feedback.style.display = 'block';
+        feedback.style.background = 'rgba(239,68,68,0.1)';
+        feedback.style.border = '1px solid rgba(239,68,68,0.3)';
+        feedback.style.color = '#f87171';
+        feedback.textContent = 'Oops — something went wrong. Please try again or reach out on LinkedIn.';
+      }
+
+      btn.textContent = 'Send Message →';
+      btn.disabled = false;
+    }
+  </script>
+
+</body>
+</html>
