@@ -552,227 +552,606 @@
     }
     .reddit-toggle-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-    /* ── Reddit Mode ── */
+    /* ════════════════════════════════════════
+       REDDIT MODE — full Reddit UI replica
+       ════════════════════════════════════════ */
     body.reddit-mode {
-      --bg:      #DAE0E6;
-      --surface: #FFFFFF;
-      --surface2:#F6F7F8;
-      --accent:  #FF4500;
-      --accent2: #FF6534;
-      --gold:    #FF4500;
-      --text:    #1c1c1c;
-      --muted:   #878A8C;
-      --border:  rgba(0,0,0,0.12);
-      --radius:  4px;
-      --glow:    0 2px 8px rgba(0,0,0,0.15);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+      --rd-orange:  #FF4500;
+      --rd-blue:    #0079D3;
+      --rd-bg:      #DAE0E6;
+      --rd-white:   #FFFFFF;
+      --rd-card:    #FFFFFF;
+      --rd-border:  #EDEFF1;
+      --rd-muted:   #878A8C;
+      --rd-text:    #1c1c1c;
+      --rd-vote-bg: #F6F7F8;
+      background: var(--rd-bg);
+      color: var(--rd-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
     }
 
-    /* Nav */
+    /* ── Reddit Top Nav ── */
     body.reddit-mode nav {
       background: #FFFFFF !important;
       backdrop-filter: none;
-      border-bottom: 1px solid #EDEFF1;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-bottom: 1px solid var(--rd-border);
+      box-shadow: none;
+      height: 48px;
+      padding: 0 20px;
     }
     body.reddit-mode .nav-logo {
       background: none; -webkit-background-clip: unset;
-      -webkit-text-fill-color: unset; color: #FF4500;
+      -webkit-text-fill-color: unset; color: var(--rd-text);
+      font-size: 1rem; font-weight: 700; letter-spacing: 0;
+      display: flex; align-items: center; gap: 6px;
     }
-    body.reddit-mode .nav-links { background: #FFFFFF; }
-    body.reddit-mode .nav-links a { color: #1c1c1c; }
-    body.reddit-mode .nav-links a:hover { color: #FF4500; }
-    body.reddit-mode .nav-links a { border-bottom-color: #EDEFF1; }
-    body.reddit-mode .hamburger span { background: #1c1c1c; }
-    body.reddit-mode .reddit-toggle-btn {
-      background: rgba(255,69,0,0.1);
-      border-color: rgba(255,69,0,0.3);
-      color: #FF4500;
-    }
-
-    /* Hero */
-    body.reddit-mode #hero {
-      background: #DAE0E6;
-      min-height: auto; padding-bottom: 2rem;
-    }
-    body.reddit-mode .hero-inner {
-      background: #FFFFFF;
-      border-radius: 4px; border: 1px solid #EDEFF1;
-      padding: 5rem 1.5rem 1.5rem;
-      margin-top: 1.5rem; position: relative;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    body.reddit-mode .hero-inner::before {
+    /* Reddit wordmark — prepend the Snoo circle */
+    body.reddit-mode .nav-logo::before {
       content: '';
-      display: block; height: 80px;
-      background: linear-gradient(90deg, #FF4500, #FF6534);
-      border-radius: 4px 4px 0 0;
-      position: absolute; top: 0; left: 0; right: 0; z-index: 0;
+      display: inline-block; width: 32px; height: 32px;
+      background: var(--rd-orange);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Ccircle cx='10' cy='10.5' r='6'/%3E%3Ccircle cx='10' cy='9' r='3' fill='white'/%3E%3Ccircle cx='8.5' cy='8.5' r='0.7' fill='%23FF4500'/%3E%3Ccircle cx='11.5' cy='8.5' r='0.7' fill='%23FF4500'/%3E%3Cpath d='M8.5 10.5 Q10 11.8 11.5 10.5' fill='none' stroke='%23FF4500' stroke-width='0.8'/%3E%3Ccircle cx='6.5' cy='6' r='1' fill='white'/%3E%3Ccircle cx='13.5' cy='6' r='1' fill='white'/%3E%3Cline x1='10' y1='6' x2='10' y2='4.5' stroke='white' stroke-width='1'/%3E%3Ccircle cx='10' cy='4' r='0.8' fill='white'/%3E%3C/svg%3E");
+      background-size: 70%;
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
     }
-    body.reddit-mode .hero-inner > * { position: relative; z-index: 1; }
-    body.reddit-mode .hero-avatar-wrap { order: unset; display: block; position: absolute; top: 40px; left: 1.5rem; z-index: 2; }
+    body.reddit-mode .nav-links {
+      background: #FFFFFF;
+      display: flex; flex-direction: row; gap: 0;
+      position: static;
+      border: none; padding: 0; backdrop-filter: none;
+    }
+    body.reddit-mode .nav-links a {
+      color: var(--rd-text); font-size: 0.8rem; font-weight: 700;
+      border: none; padding: 0 10px;
+      border-bottom: none; line-height: 48px;
+      white-space: nowrap;
+    }
+    body.reddit-mode .nav-links a:hover { color: var(--rd-orange); background: var(--rd-bg); text-decoration: none; }
+    body.reddit-mode .hamburger span { background: var(--rd-text); }
+    body.reddit-mode .reddit-toggle-btn {
+      background: var(--rd-orange); border: none;
+      color: #fff; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0;
+      padding: 0.35rem 1rem;
+    }
+    body.reddit-mode .reddit-toggle-btn:hover { background: #E03D00; color: #fff; }
+    body.reddit-mode .reddit-toggle-btn svg { display: none; }
+
+    /* ── Subreddit Banner (replaces Hero) ── */
+    body.reddit-mode #hero {
+      background: var(--rd-bg);
+      min-height: auto !important;
+      padding: 48px 0 0 !important; /* offset for fixed nav */
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+    /* Banner image strip */
+    body.reddit-mode #hero::before {
+      content: '';
+      display: block;
+      height: 160px;
+      background: linear-gradient(135deg, #FF4500 0%, #FF6534 40%, #FFB347 100%);
+    }
+    /* White subreddit identity bar */
+    body.reddit-mode .hero-inner {
+      display: block !important;
+      background: var(--rd-white);
+      border: none; border-bottom: 1px solid var(--rd-border);
+      padding: 0 24px 16px !important;
+      margin: 0 !important; max-width: none !important;
+      width: 100%; gap: 0;
+      position: relative; z-index: 1;
+    }
+    body.reddit-mode .hero-avatar-wrap {
+      order: unset !important; display: block !important;
+      position: relative; margin-top: -38px;
+      flex-shrink: 0; z-index: 2; float: left;
+      margin-right: 16px; padding-bottom: 8px;
+    }
     body.reddit-mode .hero-avatar {
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 4px solid #FFFFFF; box-shadow: none;
-      background: #DAE0E6;
+      width: 72px; height: 72px;
+      border: 4px solid #fff;
+      border-radius: 50%; box-shadow: none;
+      background: var(--rd-orange);
+      overflow: hidden;
+    }
+    body.reddit-mode .hero-avatar img {
+      display: block !important;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
     }
     body.reddit-mode .hero-avatar-ring { display: none; }
-    body.reddit-mode .hero-tag {
-      background: rgba(255,69,0,0.08);
-      border-color: rgba(255,69,0,0.3); color: #FF4500;
+    body.reddit-mode .hero-inner > div:first-child { padding-top: 8px; overflow: hidden; }
+    /* subreddit name & join row */
+    body.reddit-mode h1 {
+      font-size: 1.5rem !important; font-weight: 700 !important;
+      letter-spacing: 0 !important; line-height: 1.2 !important;
+      margin-bottom: 2px !important;
     }
-    body.reddit-mode .hero-tag::before { background: #FF4500; }
     body.reddit-mode h1 span {
-      background: linear-gradient(135deg, #FF4500, #FF6534);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background: none !important; -webkit-text-fill-color: var(--rd-text) !important;
+      color: var(--rd-text) !important;
     }
-    body.reddit-mode .hero-sub { color: #878A8C; }
-    body.reddit-mode .hero-stats { border-top: 1px solid #EDEFF1; }
-    body.reddit-mode .stat-num { color: #FF4500; font-size: 1.4rem; }
-    body.reddit-mode .stat-lbl {
-      text-transform: uppercase; font-size: 0.65rem;
-      letter-spacing: 0.05em; color: #878A8C;
+    body.reddit-mode .hero-tag { display: none !important; }
+    body.reddit-mode .hero-sub {
+      font-size: 0.8rem; color: var(--rd-muted);
+      margin-bottom: 8px; max-width: 600px; line-height: 1.5;
     }
-
-    /* Buttons */
+    body.reddit-mode .hero-ctas { gap: 8px; flex-wrap: wrap; margin-bottom: 0; }
     body.reddit-mode .btn-primary {
-      background: #FF4500; box-shadow: none;
-      border-radius: 20px; text-transform: uppercase;
-      font-size: 0.8rem; letter-spacing: 0.05em;
+      background: var(--rd-blue) !important; color: #fff !important; box-shadow: none !important;
+      border-radius: 20px !important; font-size: 0.8rem !important; font-weight: 700 !important;
+      text-transform: capitalize !important; letter-spacing: 0 !important; padding: 6px 18px !important;
     }
-    body.reddit-mode .btn-primary:hover { background: #E03D00; transform: none; box-shadow: none; color: #fff; }
+    body.reddit-mode .btn-primary:hover { background: #006cbf !important; transform: none !important; box-shadow: none !important; color: #fff !important; }
     body.reddit-mode .btn-outline {
-      border-color: #FF4500; color: #FF4500;
-      border-radius: 20px; font-size: 0.8rem;
-      text-transform: uppercase; letter-spacing: 0.05em;
+      border: 1px solid var(--rd-blue) !important; color: var(--rd-blue) !important;
+      border-radius: 20px !important; font-size: 0.8rem !important; font-weight: 700 !important;
+      text-transform: capitalize !important; padding: 6px 18px !important; background: none !important;
     }
-    body.reddit-mode .btn-outline:hover { background: rgba(255,69,0,0.06); color: #FF4500; }
+    body.reddit-mode .btn-outline:hover { background: rgba(0,121,211,0.08) !important; color: var(--rd-blue) !important; }
+    /* Subreddit stats bar */
+    body.reddit-mode .hero-stats {
+      border-top: 1px solid var(--rd-border);
+      margin-top: 12px; padding-top: 12px; gap: 24px;
+      clear: both;
+    }
+    body.reddit-mode .stat-num { font-size: 1rem; font-weight: 700; color: var(--rd-text); }
+    body.reddit-mode .stat-lbl { font-size: 0.7rem; color: var(--rd-muted); text-transform: none; letter-spacing: 0; margin-top: 0; }
 
-    /* Pillars */
-    body.reddit-mode #pillars { background: #DAE0E6; }
+    /* ── Reddit page layout: feed + sidebar ── */
+    body.reddit-mode section {
+      padding: 20px 360px 20px 24px; /* right: 360px leaves room for 296px sidebar + gap */
+      background: var(--rd-bg);
+    }
+    body.reddit-mode section:first-of-type { padding-top: 0; }
+
+    /* Feed wrapper — uniform, takes full width of the constrained section */
+    body.reddit-mode #pillars .pillars-grid,
+    body.reddit-mode #achievements .achievements-inner,
+    body.reddit-mode #campaigns .campaigns-inner,
+    body.reddit-mode #quotes .quotes-inner,
+    body.reddit-mode #interviews .interviews-inner,
+    body.reddit-mode #contact .contact-inner {
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 16px 0 0 0;
+      box-sizing: border-box;
+    }
+    /* Pillars outer div also needs constraining */
+    body.reddit-mode #pillars > div[style] {
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+
+    /* Section headers become subreddit post-list headers */
+    body.reddit-mode .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--rd-muted); text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    body.reddit-mode h2.section-title {
+      font-size: 1.125rem; font-weight: 700;
+      color: var(--rd-text); letter-spacing: 0; margin-bottom: 4px;
+    }
+    body.reddit-mode .section-intro { font-size: 0.8rem; color: var(--rd-muted); margin-bottom: 12px; }
+
+    /* Sort bar above feed */
+    body.reddit-mode #pillars .pillars-grid::before,
+    body.reddit-mode #achievements .timeline::before,
+    body.reddit-mode #campaigns .campaigns-grid::before,
+    body.reddit-mode #quotes .quotes-grid::before,
+    body.reddit-mode #interviews .interviews-grid::before {
+      content: none;
+    }
+    /* Sort pill bar injected before each section's grid */
+    body.reddit-mode .rd-sort-bar {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 0.85rem; font-weight: 700; color: var(--rd-muted);
+    }
+    body.reddit-mode .rd-sort-bar span { padding: 4px 8px; border-radius: 2px; cursor: default; }
+    body.reddit-mode .rd-sort-bar span.active { background: var(--rd-bg); color: var(--rd-blue); }
+
+    /* ── Reddit Post Card (universal) ── */
+    .reddit-post {
+      display: flex; flex-direction: row;
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px;
+      cursor: pointer; overflow: hidden;
+    }
+    body.reddit-mode .reddit-post:hover { border-color: #898989; }
+    /* Vote column */
+    .rp-vote {
+      width: 40px; min-width: 40px;
+      background: var(--rd-vote-bg);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 8px 4px; gap: 2px;
+      font-size: 0.7rem; font-weight: 700; color: var(--rd-muted);
+      flex-shrink: 0;
+    }
+    .rp-vote-up { font-size: 1.1rem; color: var(--rd-muted); line-height: 1; cursor: pointer; }
+    .rp-vote-up:hover, .rp-vote-up.active { color: var(--rd-orange); }
+    .rp-vote-count { font-size: 0.7rem; font-weight: 700; color: var(--rd-text); }
+    .rp-vote-down { font-size: 1.1rem; color: var(--rd-muted); line-height: 1; cursor: pointer; }
+    .rp-vote-down:hover { color: #7193FF; }
+    /* Post body */
+    .rp-body { padding: 8px; flex: 1; min-width: 0; }
+    .rp-meta { font-size: 0.72rem; color: var(--rd-muted); margin-bottom: 6px; line-height: 1.4; }
+    .rp-meta a { color: var(--rd-blue); font-weight: 700; text-decoration: none; }
+    .rp-meta a:hover { text-decoration: underline; }
+    .rp-title { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 6px; line-height: 1.3; }
+    .rp-flair {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      background: rgba(255,69,0,0.1); color: var(--rd-orange);
+      border-radius: 2px; padding: 1px 6px; margin-bottom: 6px;
+    }
+    .rp-selftext { font-size: 0.875rem; color: var(--rd-text); line-height: 1.6; margin-bottom: 8px; }
+    .rp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .rp-tag {
+      background: rgba(0,121,211,0.08); border: 1px solid rgba(0,121,211,0.2);
+      color: var(--rd-blue); border-radius: 12px;
+      font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
+    }
+    /* Action bar */
+    .rp-actions { display: flex; gap: 4px; flex-wrap: wrap; }
+    .rp-action {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.75rem; font-weight: 700; color: var(--rd-muted);
+      padding: 6px 8px; border-radius: 2px; cursor: pointer;
+    }
+    .rp-action:hover { background: var(--rd-bg); color: var(--rd-text); }
+    /* Thumbnail on right for link posts */
+    .rp-thumb {
+      width: 128px; min-width: 128px; max-width: 128px;
+      margin: 8px 8px 8px 0; border-radius: 4px; overflow: hidden;
+      align-self: flex-start; flex-shrink: 0;
+    }
+    .rp-thumb iframe { width: 100%; height: 80px; border: none; pointer-events: none; display: block; }
+    .rp-thumb img { width: 100%; height: 80px; object-fit: cover; display: block; }
+
+    /* ── Comment card (testimonials) ── */
+    .reddit-comment {
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px;
+      padding: 8px;
+    }
+    body.reddit-mode .reddit-comment:hover { border-color: #898989; }
+    .rc-header { font-size: 0.72rem; color: var(--rd-muted); margin-bottom: 6px; }
+    .rc-header strong { color: var(--rd-blue); font-weight: 700; }
+    .rc-body { font-size: 0.875rem; color: var(--rd-text); line-height: 1.7; border-left: 2px solid var(--rd-border); padding-left: 8px; }
+    .rc-actions { display: flex; align-items: center; gap: 4px; margin-top: 8px; }
+    .rc-action {
+      font-size: 0.72rem; font-weight: 700; color: var(--rd-muted);
+      padding: 4px 6px; border-radius: 2px; cursor: pointer;
+    }
+    .rc-action:hover { background: var(--rd-bg); color: var(--rd-text); }
+    .rc-vote { display: flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 700; color: var(--rd-muted); }
+    .rc-vote-up { cursor: pointer; font-size: 0.9rem; }
+    .rc-vote-up:hover { color: var(--rd-orange); }
+
+    /* ── Sidebar widget ── */
+    .rd-sidebar {
+      width: 312px; min-width: 312px; flex-shrink: 0;
+    }
+    .rd-widget {
+      background: var(--rd-white);
+      border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 16px; overflow: hidden;
+    }
+    .rd-widget-header {
+      background: var(--rd-orange); color: #fff;
+      padding: 10px 12px; font-size: 0.8rem; font-weight: 700;
+    }
+    .rd-widget-body { padding: 12px; font-size: 0.8rem; }
+    .rd-widget-body p { color: var(--rd-text); margin-bottom: 8px; line-height: 1.5; }
+    .rd-widget-stat { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .rd-widget-stat-num { font-weight: 700; font-size: 0.9rem; }
+    .rd-widget-stat-lbl { font-size: 0.72rem; color: var(--rd-muted); }
+    .rd-widget-divider { height: 1px; background: var(--rd-border); margin: 8px 0; }
+    .rd-widget-btn {
+      display: block; width: 100%; text-align: center;
+      background: var(--rd-blue); color: #fff;
+      border-radius: 20px; padding: 6px; font-size: 0.8rem; font-weight: 700;
+      text-decoration: none; margin-top: 8px; cursor: pointer; border: none;
+    }
+    .rd-widget-btn:hover { background: #006cbf; color: #fff; text-decoration: none; }
+    .rd-widget-btn.outline {
+      background: none; border: 1px solid var(--rd-blue); color: var(--rd-blue);
+      margin-top: 6px;
+    }
+    .rd-widget-btn.outline:hover { background: rgba(0,121,211,0.08); color: var(--rd-blue); }
+    .rd-rule { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--rd-border); font-size: 0.8rem; align-items: flex-start; }
+    .rd-rule-num { font-weight: 700; color: var(--rd-text); min-width: 16px; }
+    .rd-rule-text { color: var(--rd-text); }
+
+    /* ── Feed layout: main column + sidebar ── */
+    .rd-feed-layout {
+      display: flex; gap: 24px; align-items: flex-start;
+      max-width: 1200px; margin: 0 auto; padding: 20px 24px;
+    }
+    .rd-feed-main { flex: 1; min-width: 0; }
+
+    /* ── Pillars as post cards ── */
+    body.reddit-mode #pillars { background: var(--rd-bg); }
+    body.reddit-mode .pillars-grid { display: block !important; }
     body.reddit-mode .pillar-card {
-      background: #FFFFFF; border: 1px solid #EDEFF1;
-      border-radius: 4px; padding: 0.75rem 1rem 0.75rem 2.75rem;
-      position: relative;
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
     }
-    body.reddit-mode .pillar-card:hover { border-color: #818384; transform: none; box-shadow: none; }
-    body.reddit-mode .pillar-card::before {
-      content: '▲'; position: absolute; left: 0.75rem; top: 0.85rem;
-      color: #878A8C; font-size: 0.9rem;
-    }
-    body.reddit-mode .pillar-card h3 { color: #1c1c1c; font-size: 0.9rem; }
-    body.reddit-mode .pillar-card p { color: #878A8C; font-size: 0.8rem; }
-    body.reddit-mode .pillar-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+    body.reddit-mode .pillar-card:hover { border-color: #898989; }
+    body.reddit-mode .pillar-icon { display: none; }
+    body.reddit-mode .pillar-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 4px; }
+    body.reddit-mode .pillar-card p { font-size: 0.875rem; color: var(--rd-text); line-height: 1.6; margin: 0; }
 
-    /* Achievements */
-    body.reddit-mode #achievements { background: #DAE0E6; }
-    body.reddit-mode .timeline::before { background: #EDEFF1; }
+    /* ── Achievements ── */
+    body.reddit-mode #achievements { background: var(--rd-bg); }
+    body.reddit-mode .achievements-inner { /* inherits max-width from shared feed wrapper rule */ }
+    body.reddit-mode .timeline { padding-left: 0; }
+    body.reddit-mode .timeline::before { display: none; }
+    body.reddit-mode .tl-dot { display: none; }
     body.reddit-mode .tl-item {
-      background: #FFFFFF; border: 1px solid #EDEFF1;
-      border-radius: 4px; padding: 0.75rem 1rem 0.75rem 3rem;
-      margin-bottom: 0.5rem;
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
     }
-    body.reddit-mode .tl-item:hover { border-color: #818384; }
-    body.reddit-mode .tl-dot {
-      background: none; border: none; box-shadow: none;
-      width: 22px; height: 22px; border-radius: 3px;
-      display: flex; align-items: center; justify-content: center;
-      left: -2.6rem; top: 0.65rem;
-    }
-    body.reddit-mode .tl-dot::after { content: '▲'; color: #FF4500; font-size: 0.85rem; }
-    body.reddit-mode .tl-company { color: #0079D3; }
+    body.reddit-mode .tl-item:hover { border-color: #898989; }
+    body.reddit-mode .tl-header { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; }
+    body.reddit-mode .tl-company { color: var(--rd-blue); font-weight: 700; font-size: 0.72rem; }
     body.reddit-mode .tl-company::before { content: 'r/'; }
-    body.reddit-mode .tl-role { color: #1c1c1c; font-size: 0.95rem; }
-    body.reddit-mode .tl-desc { color: #1c1c1c; font-size: 0.875rem; }
+    body.reddit-mode .tl-period { font-size: 0.72rem; color: var(--rd-muted); font-weight: 400; }
+    body.reddit-mode .tl-role { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 4px; line-height: 1.3; }
+    body.reddit-mode .tl-desc { font-size: 0.875rem; color: var(--rd-text); line-height: 1.6; margin-bottom: 8px; }
+    body.reddit-mode .tl-metrics { display: flex; gap: 6px; flex-wrap: wrap; }
     body.reddit-mode .tl-metric {
       background: rgba(0,121,211,0.08) !important;
-      border-color: rgba(0,121,211,0.25) !important; color: #0079D3 !important;
+      border: 1px solid rgba(0,121,211,0.2) !important; color: var(--rd-blue) !important;
+      border-radius: 12px; font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
     }
 
-    /* Campaigns */
-    body.reddit-mode #campaigns { background: #DAE0E6; }
+    /* ── Campaigns ── */
+    body.reddit-mode #campaigns { background: var(--rd-bg); }
+    body.reddit-mode .campaigns-grid { display: block !important; }
     body.reddit-mode .campaign-card {
-      background: #FFFFFF; border: 1px solid #EDEFF1;
-      border-radius: 4px; flex-direction: row; overflow: visible;
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
     }
-    body.reddit-mode .campaign-card:hover { border-color: #818384; transform: none; box-shadow: none; }
+    body.reddit-mode .campaign-card:hover { border-color: #898989; }
     body.reddit-mode .campaign-thumb {
-      width: 120px; min-width: 120px; aspect-ratio: 1;
-      order: 2; border-radius: 0 4px 4px 0; overflow: hidden; flex-shrink: 0;
+      width: 128px; min-width: 128px; max-width: 128px;
+      order: 3; margin: 8px 8px 8px 0;
+      border-radius: 4px; overflow: hidden; flex-shrink: 0; align-self: flex-start;
+      aspect-ratio: unset; height: 80px;
     }
-    body.reddit-mode .campaign-thumb iframe { pointer-events: none; }
-    body.reddit-mode .campaign-body { order: 1; padding: 0.6rem 0.75rem; flex: 1; }
-    body.reddit-mode .campaign-card h3 { font-size: 0.875rem; color: #1c1c1c; }
+    body.reddit-mode .campaign-thumb iframe { width: 100%; height: 80px; border: none; pointer-events: none; }
+    body.reddit-mode .campaign-body { order: 2; padding: 8px; flex: 1; min-width: 0; }
+    body.reddit-mode .campaign-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); margin-bottom: 6px; line-height: 1.3; }
     body.reddit-mode .campaign-badge {
-      background: #F6F7F8 !important; border: 1px solid #EDEFF1 !important;
-      color: #878A8C !important; font-size: 0.68rem; border-radius: 2px;
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      background: rgba(255,69,0,0.1) !important; color: var(--rd-orange) !important;
+      border: none !important; border-radius: 2px; padding: 1px 6px; margin-bottom: 6px;
     }
-    body.reddit-mode .campaign-desc { font-size: 0.8rem; color: #878A8C; }
-    body.reddit-mode .campaign-impact { gap: 0.75rem; margin-top: 0.4rem; }
+    body.reddit-mode .campaign-desc { font-size: 0.875rem; color: var(--rd-text); line-height: 1.5; margin-bottom: 8px; }
+    body.reddit-mode .campaign-impact { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
     body.reddit-mode .campaign-impact span {
-      background: none !important; border: none !important;
-      color: #878A8C !important; font-size: 0.75rem; font-weight: 700; padding: 0;
+      background: rgba(0,121,211,0.08) !important; border: 1px solid rgba(0,121,211,0.2) !important;
+      color: var(--rd-blue) !important; border-radius: 12px;
+      font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
     }
-    body.reddit-mode .campaign-impact span:first-child::before { content: '▲ '; color: #FF4500; }
-    body.reddit-mode .campaign-link { color: #0079D3; font-size: 0.72rem; text-transform: uppercase; font-weight: 700; }
+    body.reddit-mode .campaign-link {
+      font-size: 0.75rem; font-weight: 700; color: var(--rd-muted);
+      text-transform: none; padding: 6px 8px; border-radius: 2px; margin-top: 0;
+    }
+    body.reddit-mode .campaign-link:hover { background: var(--rd-bg); color: var(--rd-text); text-decoration: none; }
 
-    /* Quotes */
-    body.reddit-mode #quotes { background: #DAE0E6; }
+    /* ── Quotes as comment thread ── */
+    body.reddit-mode #quotes { background: var(--rd-bg); }
+    body.reddit-mode .quotes-grid { display: block !important; }
     body.reddit-mode .quote-card {
-      background: #FFFFFF; border: 1px solid #EDEFF1;
-      border-radius: 4px; border-left: 3px solid #EDEFF1;
+      all: unset;
+      display: block;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; padding: 8px;
     }
-    body.reddit-mode .quote-card:hover { border-left-color: #0079D3; transform: none; box-shadow: none; }
+    body.reddit-mode .quote-card:hover { border-color: #898989; }
     body.reddit-mode .quote-mark { display: none; }
-    body.reddit-mode .quote-text { font-style: normal; color: #1c1c1c; font-size: 0.875rem; }
-    body.reddit-mode .quote-author { border-top: none; padding-top: 0.25rem; }
-    body.reddit-mode .quote-avatar { background: #FF4500; width: 24px; height: 24px; font-size: 0.6rem; }
-    body.reddit-mode .quote-author-name { color: #0079D3; font-size: 0.8rem; }
-    body.reddit-mode .quote-author-role { font-size: 0.72rem; color: #878A8C; }
+    body.reddit-mode .quote-text { font-size: 0.875rem; color: var(--rd-text); line-height: 1.7; font-style: normal; border-left: 2px solid var(--rd-border); padding-left: 8px; }
+    body.reddit-mode .quote-author { border-top: none; padding-top: 0; gap: 6px; margin-top: 8px; align-items: center; }
+    body.reddit-mode .quote-avatar { background: var(--rd-orange); width: 20px; height: 20px; font-size: 0.55rem; border-radius: 50%; flex-shrink: 0; }
+    body.reddit-mode .quote-author-name { color: var(--rd-blue); font-size: 0.72rem; font-weight: 700; }
+    body.reddit-mode .quote-author-role { font-size: 0.72rem; color: var(--rd-muted); }
     body.reddit-mode .quote-card::after {
-      content: '▲ upvote  •  reply  •  share  •  report';
-      display: block; font-size: 0.7rem; font-weight: 700;
-      color: #878A8C; margin-top: 0.75rem; letter-spacing: 0.02em;
+      content: '▲ Upvote  💬 Reply  🔗 Share  ⚑ Report';
+      display: flex; font-size: 0.72rem; font-weight: 700;
+      color: var(--rd-muted); margin-top: 8px; gap: 4px;
     }
-    body.reddit-mode .quotes-see-all-link { color: #0079D3; border-bottom-color: #0079D3; }
+    body.reddit-mode .quotes-see-all-link { color: var(--rd-blue); border-bottom-color: var(--rd-blue); font-size: 0.8rem; }
 
-    /* Interviews */
-    body.reddit-mode #interviews { background: #DAE0E6; }
+    /* ── Interviews ── */
+    body.reddit-mode #interviews { background: var(--rd-bg); }
+    body.reddit-mode .interviews-grid { display: block !important; }
     body.reddit-mode .interview-card {
-      background: #FFFFFF; border: 1px solid #EDEFF1; border-radius: 4px;
+      all: unset;
+      display: flex; flex-direction: row;
+      background: var(--rd-white); border: 1px solid var(--rd-border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden; cursor: pointer;
     }
-    body.reddit-mode .interview-card:hover { border-color: #818384; transform: none; box-shadow: none; }
+    body.reddit-mode .interview-card:hover { border-color: #898989; }
+    body.reddit-mode .interview-thumb {
+      width: 128px; min-width: 128px; max-width: 128px;
+      height: 80px; order: 3; margin: 8px 8px 8px 0;
+      border-radius: 4px; overflow: hidden; flex-shrink: 0;
+      align-self: flex-start; font-size: 0; background: #000;
+      aspect-ratio: unset; position: relative;
+    }
+    body.reddit-mode .interview-thumb iframe { width: 100%; height: 80px; border: none; pointer-events: none; position: absolute; inset: 0; }
+    body.reddit-mode .interview-thumb img { width: 100%; height: 80px; object-fit: cover; }
+    body.reddit-mode .interview-body { order: 2; padding: 8px; flex: 1; min-width: 0; gap: 4px; }
     body.reddit-mode .interview-badge {
-      background: #F6F7F8 !important; border-color: #EDEFF1 !important; color: #878A8C !important;
+      background: rgba(255,69,0,0.1) !important; border: none !important;
+      color: var(--rd-orange) !important; font-size: 0.7rem; border-radius: 2px; padding: 1px 6px;
     }
-    body.reddit-mode .interview-link { color: #0079D3; font-size: 0.72rem; text-transform: uppercase; font-weight: 700; }
-    body.reddit-mode .interview-highlights span { background: #F6F7F8; border-color: #EDEFF1; color: #878A8C; }
+    body.reddit-mode .interview-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--rd-text); line-height: 1.3; margin-bottom: 4px; }
+    body.reddit-mode .interview-meta { font-size: 0.72rem; color: var(--rd-muted); }
+    body.reddit-mode .interview-link { color: var(--rd-muted); font-size: 0.75rem; font-weight: 700; text-transform: none; padding: 6px 8px; border-radius: 2px; margin-top: 4px; }
+    body.reddit-mode .interview-link:hover { background: var(--rd-bg); color: var(--rd-text); text-decoration: none; }
+    body.reddit-mode .interview-highlights span { background: var(--rd-vote-bg); border-color: var(--rd-border); color: var(--rd-muted); font-size: 0.7rem; }
+    /* CTA card */
+    body.reddit-mode .interview-card[style*="dashed"] {
+      background: var(--rd-white) !important;
+      border: 1px solid var(--rd-border) !important;
+      border-radius: 4px !important; justify-content: center;
+      padding: 20px; text-align: center; flex-direction: column;
+    }
 
-    /* Contact */
-    body.reddit-mode #contact { background: #DAE0E6; }
+    /* ── Contact ── */
+    body.reddit-mode #contact { background: var(--rd-bg); }
+    body.reddit-mode .contact-inner { max-width: 740px; }
     body.reddit-mode input, body.reddit-mode textarea {
-      background: #FFFFFF; border-color: #EDEFF1; color: #1c1c1c;
+      background: var(--rd-white); border: 1px solid var(--rd-border); color: var(--rd-text);
+      border-radius: 4px; font-size: 0.875rem;
     }
     body.reddit-mode input:focus, body.reddit-mode textarea:focus {
-      border-color: #0079D3; box-shadow: 0 0 0 2px rgba(0,121,211,0.15);
+      border-color: var(--rd-blue); box-shadow: 0 0 0 2px rgba(0,121,211,0.15);
     }
-    body.reddit-mode label { color: #878A8C; }
+    body.reddit-mode label { color: var(--rd-text); font-size: 0.8rem; font-weight: 700; }
     body.reddit-mode .btn-submit {
-      background: #FF4500; box-shadow: none;
-      border-radius: 20px; text-transform: uppercase;
-      letter-spacing: 0.05em; font-size: 0.9rem;
+      background: var(--rd-blue); box-shadow: none;
+      border-radius: 20px; font-size: 0.875rem; font-weight: 700;
+      text-transform: capitalize; letter-spacing: 0;
     }
-    body.reddit-mode .btn-submit:hover { background: #E03D00; transform: none; box-shadow: none; }
-    body.reddit-mode .contact-also { background: #FFFFFF; border-color: #EDEFF1; }
+    body.reddit-mode .btn-submit:hover { background: #006cbf; transform: none; box-shadow: none; }
+    body.reddit-mode .contact-also { background: var(--rd-white); border-color: var(--rd-border); border-radius: 4px; }
 
-    /* Section labels & headings */
-    body.reddit-mode .section-label { color: #878A8C; }
-    body.reddit-mode h2.section-title { color: #1c1c1c; font-weight: 700; letter-spacing: 0; }
-    body.reddit-mode .section-intro { color: #878A8C; }
+    /* ── Footer ── */
+    body.reddit-mode footer {
+      background: var(--rd-white); border-top: 1px solid var(--rd-border);
+      color: var(--rd-muted); font-size: 0.72rem;
+    }
+    body.reddit-mode footer a { color: var(--rd-muted); }
+    body.reddit-mode footer a:hover { color: var(--rd-blue); }
 
-    /* Footer */
-    body.reddit-mode footer { background: #FFFFFF; border-top: 1px solid #EDEFF1; color: #878A8C; }
-    body.reddit-mode footer a { color: #0079D3; }
+    /* ── Reddit Mode: Tablet — hide sidebar ── */
+    @media (max-width: 1100px) {
+      body.reddit-mode section {
+        padding: 16px 16px !important;
+      }
+      #rd-sidebar-fixed { display: none !important; }
+    }
+
+    /* ── Reddit Mode: Mobile — full Reddit app feel ── */
+    @media (max-width: 768px) {
+      /* Nav becomes Reddit orange mobile bar */
+      body.reddit-mode nav {
+        background: var(--rd-orange) !important;
+        border-bottom: none !important;
+      }
+      body.reddit-mode .nav-logo {
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        -webkit-text-fill-color: #fff !important;
+        color: #fff !important;
+      }
+      body.reddit-mode nav .nav-links a { color: rgba(255,255,255,0.9) !important; }
+      body.reddit-mode .reddit-toggle-btn {
+        background: rgba(255,255,255,0.2) !important;
+        color: #fff !important;
+      }
+      body.reddit-mode .hamburger span {
+        background: #fff !important;
+      }
+
+      /* Hero: compact mobile profile header */
+      body.reddit-mode #hero::before { height: 100px; }
+      body.reddit-mode .hero-inner {
+        padding: 0 12px 12px !important;
+      }
+      body.reddit-mode .hero-avatar-wrap { margin-top: -24px; }
+      body.reddit-mode .hero-avatar { width: 56px; height: 56px; }
+
+      /* Sections: full width, no right padding */
+      body.reddit-mode section {
+        padding: 0 !important;
+      }
+      body.reddit-mode #pillars .pillars-grid,
+      body.reddit-mode #achievements .achievements-inner,
+      body.reddit-mode #campaigns .campaigns-inner,
+      body.reddit-mode #quotes .quotes-inner,
+      body.reddit-mode #interviews .interviews-inner,
+      body.reddit-mode #contact .contact-inner {
+        padding: 12px 0 0 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+      }
+      /* Section headers: left-padded like Reddit app */
+      body.reddit-mode .section-label,
+      body.reddit-mode h2.section-title,
+      body.reddit-mode .section-intro {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      /* Posts: no border-radius on mobile (edge-to-edge like app) */
+      body.reddit-mode .reddit-post,
+      body.reddit-mode .reddit-comment {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        margin-bottom: 8px;
+      }
+      /* Sort bar: edge-to-edge */
+      body.reddit-mode .rd-sort-bar {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        padding: 10px 12px;
+      }
+
+      /* Hide sidebar entirely on mobile */
+      #rd-sidebar-fixed { display: none !important; }
+
+      /* Mobile bottom nav bar — Reddit-style */
+      body.reddit-mode #rd-mobile-nav {
+        display: flex !important;
+      }
+    }
+
+    /* Reddit mobile bottom nav bar (hidden by default, shown on mobile) */
+    #rd-mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 52px;
+      background: #fff;
+      border-top: 1px solid #EDEFF1;
+      z-index: 200;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 8px;
+    }
+    #rd-mobile-nav .rd-nav-item {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1; font-size: 0.6rem; color: #878A8C;
+      cursor: pointer; padding: 6px 0;
+      gap: 2px;
+    }
+    #rd-mobile-nav .rd-nav-item.active { color: #FF4500; }
+    #rd-mobile-nav .rd-nav-icon { font-size: 1.2rem; line-height: 1; }
   </style>
 </head>
 <body>
@@ -1381,24 +1760,292 @@
     (function() {
       const STORAGE_KEY = 'reddit-mode';
       const REDDIT_TEXT = {
-        'Years in Tech':   'Post Karma',
-        'Acquisitions':    'Gold Awards',
-        'Users Reached':   'Upvote Karma',
+        'Years in Tech':   'Members Online',
+        'Acquisitions':    'Top Awards',
+        'Users Reached':   'Total Members',
         'Countries':       'Communities',
-        'What I bring':    'r/skills',
-        'Track Record':    'r/achievements',
-        'Creative Work':   'r/campaigns',
-        'What People Say': 'r/testimonials',
-        'In the Spotlight':'r/interviews',
-        "Let's Talk":      'r/connect',
+        'What I bring':    'r/AsaphSkills',
+        'Track Record':    'r/AsaphCareer',
+        'Creative Work':   'r/AsaphCampaigns',
+        'What People Say': 'r/AsaphTestimonials',
+        'In the Spotlight':'r/AsaphInterviews',
+        "Let's Talk":      'r/AsaphContact',
       };
 
-      function applyMode(isReddit) {
+      // vote counts per card (stable random seeded by index)
+      function voteCount(i) { return [2847,1923,4102,987,3311,1654,2209,876,3089,1432,2756,543][i % 12]; }
+      function commentCount(i) { return [247,89,412,134,298,67,189,45,321,178,234,91][i % 12]; }
+
+      function buildVoteCol(votes) {
+        return `<div class="rp-vote"><span class="rp-vote-up" title="Upvote">▲</span><span class="rp-vote-count">${(votes/1000).toFixed(1)}k</span><span class="rp-vote-down" title="Downvote">▼</span></div>`;
+      }
+      function buildActions(comments, subreddit) {
+        return `<div class="rp-actions">
+          <span class="rp-action">💬 ${comments} Comments</span>
+          <span class="rp-action">🔗 Share</span>
+          <span class="rp-action">⭐ Save</span>
+          <span class="rp-action">••• More</span>
+        </div>`;
+      }
+      function buildSortBar() {
+        return `<div class="rd-sort-bar">
+          <span style="color:#FF4500;font-size:1rem;">🔥</span>
+          <span class="active">Hot</span>
+          <span>New</span>
+          <span>Top</span>
+          <span>Rising</span>
+        </div>`;
+      }
+      function buildSidebar() {
+        return `<aside class="rd-sidebar">
+          <div class="rd-widget">
+            <div class="rd-widget-header">📌 About r/AsaphSchulman</div>
+            <div class="rd-widget-body">
+              <p>The official subreddit for Asaph Schulman — CMO, startup builder, and marketing leader. Posts about campaigns, career wins, and the art of building brands people actually care about.</p>
+              <div class="rd-widget-divider"></div>
+              <div class="rd-widget-stat"><div><div class="rd-widget-stat-num">2M+</div><div class="rd-widget-stat-lbl">Members</div></div><div><div class="rd-widget-stat-num">247</div><div class="rd-widget-stat-lbl">Online</div></div></div>
+              <div class="rd-widget-divider"></div>
+              <div style="font-size:0.72rem;color:#878A8C;margin-bottom:8px;">🎂 Created Jan 2004 &nbsp;·&nbsp; 🌍 180 Countries</div>
+              <a class="rd-widget-btn" href="#contact">Message Asaph</a>
+              <a class="rd-widget-btn outline" href="https://www.linkedin.com/in/asaphs/" target="_blank">View LinkedIn</a>
+            </div>
+          </div>
+          <div class="rd-widget">
+            <div class="rd-widget-header" style="background:#0079D3;">📋 Subreddit Rules</div>
+            <div class="rd-widget-body">
+              <div class="rd-rule"><span class="rd-rule-num">1</span><span class="rd-rule-text">Be respectful and professional</span></div>
+              <div class="rd-rule"><span class="rd-rule-num">2</span><span class="rd-rule-text">No spam or self-promotion</span></div>
+              <div class="rd-rule"><span class="rd-rule-num">3</span><span class="rd-rule-text">Marketing talk encouraged</span></div>
+              <div class="rd-rule"><span class="rd-rule-num">4</span><span class="rd-rule-text">Data or it didn't happen</span></div>
+              <div class="rd-rule" style="border:none"><span class="rd-rule-num">5</span><span class="rd-rule-text">No fluff. Real talk only.</span></div>
+            </div>
+          </div>
+          <div class="rd-widget">
+            <div class="rd-widget-body" style="font-size:0.72rem;color:#878A8C;line-height:1.8;">
+              Help · About · Careers · Press<br>Blog · Rules · Privacy · Terms<br><br>
+              Reddit Inc © 2025. All rights reserved.
+            </div>
+          </div>
+        </aside>`;
+      }
+
+      function wrapInFeedLayout(section, feedHtml, hasSidebar) {
+        const existing = section.querySelector('.rd-feed-layout');
+        if (existing) { existing.innerHTML = ''; }
+        const layout = document.createElement('div');
+        layout.className = 'rd-feed-layout';
+        layout.innerHTML = `<div class="rd-feed-main">${feedHtml}</div>${hasSidebar ? buildSidebar() : ''}`;
+        // Move existing section children aside, insert layout
+        const inner = section.firstElementChild;
+        if (inner) section.insertBefore(layout, inner.nextSibling);
+      }
+
+      function injectRedditUI() {
+        // ── Pillar cards → Reddit posts ──
+        document.querySelectorAll('.pillar-card').forEach((card, i) => {
+          if (card.querySelector('.rp-vote')) return;
+          const h3 = card.querySelector('h3')?.textContent || '';
+          const p  = card.querySelector('p')?.textContent || '';
+          const icon = card.querySelector('.pillar-icon')?.textContent || '';
+          card.innerHTML = `
+            ${buildVoteCol(voteCount(i))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> in <a href="#">r/AsaphSkills</a></div>
+              <div class="rp-title">${icon} ${h3}</div>
+              <div class="rp-selftext">${p}</div>
+              ${buildActions(commentCount(i))}
+            </div>`;
+        });
+        // Add sort bar before pillars grid
+        const pg = document.querySelector('#pillars .pillars-grid');
+        if (pg && !pg.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          pg.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Timeline items → Reddit posts ──
+        document.querySelectorAll('.tl-item').forEach((item, i) => {
+          if (item.querySelector('.rp-vote')) return;
+          const company = item.querySelector('.tl-company')?.textContent || '';
+          const period  = item.querySelector('.tl-period')?.textContent || '';
+          const role    = item.querySelector('.tl-role')?.textContent || '';
+          const desc    = item.querySelector('.tl-desc')?.textContent || '';
+          const metrics = [...item.querySelectorAll('.tl-metric')].map(m => `<span class="rp-tag">${m.textContent}</span>`).join('');
+          item.innerHTML = `
+            ${buildVoteCol(voteCount(i+10))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> · <a href="#">r/${company.trim()}</a> · ${period}</div>
+              <div class="rp-flair">Career</div>
+              <div class="rp-title">${role}</div>
+              <div class="rp-selftext">${desc}</div>
+              <div class="rp-tags">${metrics}</div>
+              ${buildActions(commentCount(i+10))}
+            </div>`;
+        });
+        const tl = document.querySelector('#achievements .timeline');
+        if (tl && !tl.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          tl.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Campaign cards → Reddit link posts ──
+        document.querySelectorAll('.campaign-card').forEach((card, i) => {
+          if (card.querySelector('.rp-vote')) return;
+          const badge = card.querySelector('.campaign-badge')?.textContent?.trim() || '';
+          const h3    = card.querySelector('h3')?.textContent || '';
+          const desc  = card.querySelector('.campaign-desc')?.textContent || '';
+          const impacts = [...card.querySelectorAll('.campaign-impact span')].map(s => `<span class="rp-tag">${s.textContent}</span>`).join('');
+          const thumbHTML = card.querySelector('.campaign-thumb')?.innerHTML || '';
+          const links = [...card.querySelectorAll('.campaign-link')].map(a =>
+            `<a class="rp-action" href="${a.href}" target="_blank">${a.textContent.trim()}</a>`).join('');
+          card.innerHTML = `
+            ${buildVoteCol(voteCount(i+4))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> in <a href="#">r/AsaphCampaigns</a></div>
+              <span class="rp-flair">${badge}</span>
+              <div class="rp-title">${h3}</div>
+              <div class="rp-selftext">${desc}</div>
+              <div class="rp-tags">${impacts}</div>
+              <div class="rp-actions">${links}
+                <span class="rp-action">💬 ${commentCount(i+4)} Comments</span>
+                <span class="rp-action">🔗 Share</span>
+                <span class="rp-action">⭐ Save</span>
+              </div>
+            </div>
+            <div class="rp-thumb">${thumbHTML}</div>`;
+        });
+        const cg = document.querySelector('#campaigns .campaigns-grid');
+        if (cg && !cg.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          cg.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Quote cards → Reddit comments ──
+        document.querySelectorAll('.quote-card').forEach((card, i) => {
+          if (card.dataset.rdDone) return;
+          card.dataset.rdDone = '1';
+          const text   = card.querySelector('.quote-text')?.textContent || '';
+          const name   = card.querySelector('.quote-author-name')?.textContent || '';
+          const role   = card.querySelector('.quote-author-role')?.textContent || '';
+          const initials = card.querySelector('.quote-avatar')?.textContent || '??';
+          const votes  = voteCount(i+7);
+          card.innerHTML = `
+            <div class="rc-header">
+              <strong>u/${name.split(' ')[0]}${name.split(' ')[1]?.[0] || ''}</strong>
+              &nbsp;·&nbsp; ${role}
+              &nbsp;·&nbsp; ${Math.floor(Math.random()*12)+1}h ago
+            </div>
+            <div class="rc-body">${text}</div>
+            <div class="rc-actions">
+              <div class="rc-vote"><span class="rc-vote-up">▲</span>&nbsp;${Math.floor(votes/100)} points</div>
+              <span class="rc-action">💬 Reply</span>
+              <span class="rc-action">🔗 Share</span>
+              <span class="rc-action">⭐ Save</span>
+              <span class="rc-action">⚑ Report</span>
+            </div>`;
+        });
+        const qg = document.querySelector('#quotes .quotes-grid');
+        if (qg && !qg.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          qg.insertAdjacentHTML('beforebegin', `<div class="rd-sort-bar">
+            <span style="color:#0079D3;font-size:1rem;">💬</span>
+            <span class="active" style="color:#0079D3;">Best</span>
+            <span>Top</span><span>New</span><span>Controversial</span>
+          </div>`);
+        }
+
+        // ── Interview cards → link posts ──
+        document.querySelectorAll('.interview-card').forEach((card, i) => {
+          if (card.querySelector('.rp-vote')) return;
+          const badge = card.querySelector('.interview-badge')?.textContent?.trim() || '';
+          const h3    = card.querySelector('h3')?.textContent || '';
+          const meta  = card.querySelector('.interview-meta')?.textContent || '';
+          const link  = card.querySelector('.interview-link');
+          const href  = link?.href || '#';
+          const linkText = link?.textContent?.trim() || 'Watch';
+          const thumbHTML = card.querySelector('.interview-thumb')?.innerHTML || '';
+          const highlights = [...card.querySelectorAll('.interview-highlights span')].map(s => `<span class="rp-tag">${s.textContent}</span>`).join('');
+          card.innerHTML = `
+            ${buildVoteCol(voteCount(i+2))}
+            <div class="rp-body">
+              <div class="rp-meta">Posted by <a href="#">u/AsaphSchulman</a> in <a href="#">r/AsaphInterviews</a></div>
+              <span class="rp-flair">${badge}</span>
+              <div class="rp-title">${h3}</div>
+              <div class="rp-selftext" style="color:#878A8C;font-size:0.8rem;">${meta}</div>
+              ${highlights ? `<div class="rp-tags">${highlights}</div>` : ''}
+              <div class="rp-actions">
+                <a class="rp-action" href="${href}" target="_blank">${linkText}</a>
+                <span class="rp-action">💬 ${commentCount(i+2)} Comments</span>
+                <span class="rp-action">🔗 Share</span>
+                <span class="rp-action">⭐ Save</span>
+              </div>
+            </div>
+            <div class="rp-thumb">${thumbHTML}</div>`;
+        });
+        const ig = document.querySelector('#interviews .interviews-grid');
+        if (ig && !ig.previousElementSibling?.classList.contains('rd-sort-bar')) {
+          ig.insertAdjacentHTML('beforebegin', buildSortBar());
+        }
+
+        // ── Inject sidebar as fixed right panel ──
+        if (!document.getElementById('rd-sidebar-fixed')) {
+          const sidebar = document.createElement('div');
+          sidebar.id = 'rd-sidebar-fixed';
+          sidebar.style.cssText = 'position:fixed;top:80px;right:24px;width:296px;z-index:50;max-height:calc(100vh - 100px);overflow-y:auto;overflow-x:hidden;';
+          sidebar.innerHTML = buildSidebar();
+          document.body.appendChild(sidebar);
+        }
+
+        // ── Inject mobile bottom nav bar ──
+        if (!document.getElementById('rd-mobile-nav')) {
+          const mobileNav = document.createElement('div');
+          mobileNav.id = 'rd-mobile-nav';
+          mobileNav.innerHTML = `
+            <div class="rd-nav-item active" onclick="window.scrollTo(0,0)">
+              <span class="rd-nav-icon">🏠</span>
+              <span>Home</span>
+            </div>
+            <div class="rd-nav-item" onclick="document.getElementById('achievements').scrollIntoView({behavior:'smooth'})">
+              <span class="rd-nav-icon">⭐</span>
+              <span>Track Record</span>
+            </div>
+            <div class="rd-nav-item" onclick="document.getElementById('campaigns').scrollIntoView({behavior:'smooth'})">
+              <span class="rd-nav-icon">📢</span>
+              <span>Campaigns</span>
+            </div>
+            <div class="rd-nav-item" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              <span class="rd-nav-icon">✉️</span>
+              <span>Contact</span>
+            </div>
+          `;
+          document.body.appendChild(mobileNav);
+        }
+      }
+
+      function removeRedditUI() {
+        // Remove injected sort bars
+        document.querySelectorAll('.rd-sort-bar').forEach(el => el.remove());
+        // Remove injected feed layouts
+        document.querySelectorAll('.rd-feed-layout').forEach(el => el.remove());
+        // Remove sidebar and mobile nav
+        const sb = document.getElementById('rd-sidebar-fixed');
+        if (sb) sb.remove();
+        const mn = document.getElementById('rd-mobile-nav');
+        if (mn) mn.remove();
+        // Pillar cards: restore original markup
+        document.querySelectorAll('.pillar-card').forEach(card => {
+          if (!card.querySelector('.rp-vote')) return;
+          card.dataset.rdRestored = '';
+        });
+        // We DON'T restore card innerHTML — page reload will reset.
+        // Instead, for a clean toggle we track state and reload if needed.
+      }
+
+      function applyMode(isReddit, initial) {
         const body = document.body;
-        const btn = document.getElementById('reddit-toggle');
+        const btn  = document.getElementById('reddit-toggle');
         body.classList.toggle('reddit-mode', isReddit);
         btn.setAttribute('aria-pressed', String(isReddit));
-        btn.title = isReddit ? 'Switch back to dark mode' : 'Switch to Reddit mode';
+        btn.title   = isReddit ? 'Back to dark mode' : 'Switch to Reddit mode';
+        btn.innerHTML = isReddit
+          ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="11" r="7" fill="currentColor" opacity="0.15"/><circle cx="10" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9.5" r="3.5" fill="currentColor"/><circle cx="8.7" cy="9" r="0.6" fill="white"/><circle cx="11.3" cy="9" r="0.6" fill="white"/><path d="M8.5 11 Q10 12.2 11.5 11" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round"/><circle cx="7" cy="6.5" r="1.2" fill="currentColor"/><circle cx="13" cy="6.5" r="1.2" fill="currentColor"/><line x1="10" y1="6.5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="4.5" r="0.8" fill="currentColor"/></svg> Dark mode`
+          : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="11" r="7" fill="currentColor" opacity="0.15"/><circle cx="10" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9.5" r="3.5" fill="currentColor"/><circle cx="8.7" cy="9" r="0.6" fill="white"/><circle cx="11.3" cy="9" r="0.6" fill="white"/><path d="M8.5 11 Q10 12.2 11.5 11" fill="none" stroke="white" stroke-width="0.8" stroke-linecap="round"/><circle cx="7" cy="6.5" r="1.2" fill="currentColor"/><circle cx="13" cy="6.5" r="1.2" fill="currentColor"/><line x1="10" y1="6.5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="4.5" r="0.8" fill="currentColor"/></svg> r/`;
 
         // Swap text labels
         document.querySelectorAll('.stat-lbl, .section-label').forEach(el => {
@@ -1406,18 +2053,26 @@
             const mapped = REDDIT_TEXT[el.textContent.trim()];
             if (mapped) { el.dataset.original = el.textContent; el.textContent = mapped; }
           } else {
-            if (el.dataset.original) { el.textContent = el.dataset.original; }
+            if (el.dataset.original) { el.textContent = el.dataset.original; delete el.dataset.original; }
           }
         });
+
+        if (isReddit) {
+          injectRedditUI();
+        } else if (!initial) {
+          // Reload to restore original card markup cleanly
+          localStorage.setItem(STORAGE_KEY, 'false');
+          window.location.reload();
+        }
       }
 
       document.addEventListener('DOMContentLoaded', function() {
         const saved = localStorage.getItem(STORAGE_KEY) === 'true';
-        applyMode(saved);
+        applyMode(saved, true);
         document.getElementById('reddit-toggle').addEventListener('click', function() {
           const next = !document.body.classList.contains('reddit-mode');
           localStorage.setItem(STORAGE_KEY, String(next));
-          applyMode(next);
+          applyMode(next, false);
         });
       });
     })();
