@@ -1072,23 +1072,64 @@
         -webkit-text-fill-color: #fff !important;
         color: #fff !important;
       }
-      body.reddit-mode nav .nav-links a { color: rgba(255,255,255,0.9) !important; }
+      body.reddit-mode .hamburger span {
+        background: #fff !important;
+      }
       body.reddit-mode .reddit-toggle-btn {
         background: rgba(255,255,255,0.2) !important;
         color: #fff !important;
       }
-      body.reddit-mode .hamburger span {
-        background: #fff !important;
+      /* Hamburger dropdown: orange bg with white links, positioned below 48px nav */
+      body.reddit-mode .nav-links {
+        background: #E03D00 !important; /* slightly darker orange for dropdown */
+        backdrop-filter: none !important;
+        top: 48px !important;
+        padding: 0 !important;
+        border-bottom: none !important;
+      }
+      body.reddit-mode .nav-links a {
+        color: #fff !important;
+        border-bottom: 1px solid rgba(255,255,255,0.15) !important;
+        padding: 14px 20px !important;
+      }
+      body.reddit-mode .nav-links a:hover {
+        background: rgba(0,0,0,0.1) !important;
+        text-decoration: none !important;
       }
 
-      /* Hero: compact mobile profile header */
-      body.reddit-mode #hero::before { height: 100px; }
+      /* Hero: centered mobile profile — avatar above text */
+      body.reddit-mode #hero::before { height: 80px; }
       body.reddit-mode .hero-inner {
-        padding: 0 12px 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 8px 16px 16px !important;
+        text-align: center !important;
+        position: static !important;
       }
-      body.reddit-mode .hero-avatar-wrap { top: -14px !important; left: 12px !important; }
-      body.reddit-mode .hero-avatar { width: 56px; height: 56px; }
-      body.reddit-mode .hero-inner { padding-left: 80px !important; min-height: 48px; }
+      /* Avatar: reorder to top, pull up to overlap banner */
+      body.reddit-mode .hero-avatar-wrap {
+        order: -1 !important;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        float: none !important;
+        display: block !important;
+        margin: -52px auto 12px !important;
+        z-index: 2;
+      }
+      body.reddit-mode .hero-avatar { width: 72px !important; height: 72px !important; }
+      /* Text content block: full width, centered */
+      body.reddit-mode .hero-inner > div:not(.hero-avatar-wrap):not(.hero-avatar-ring) {
+        width: 100% !important;
+        overflow: visible !important;
+        padding-top: 0 !important;
+      }
+      body.reddit-mode h1 { text-align: center !important; }
+      body.reddit-mode .hero-tag { justify-content: center !important; }
+      body.reddit-mode .hero-sub { text-align: center !important; }
+      body.reddit-mode .hero-ctas { justify-content: center !important; }
+      body.reddit-mode .hero-stats { justify-content: center !important; flex-wrap: wrap !important; gap: 1rem !important; }
 
       /* Sections: full width, no right padding */
       body.reddit-mode section {
