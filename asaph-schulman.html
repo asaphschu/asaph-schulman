@@ -44,6 +44,7 @@
       font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-decoration: none; cursor: pointer;
     }
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
@@ -1222,7 +1223,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">Asaph Schulman</div>
+    <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Asaph Schulman</a>
     <div class="nav-links" id="nav-links">
       <a href="#achievements" onclick="closeNav()">Track Record</a>
       <a href="#campaigns" onclick="closeNav()">Campaigns</a>
@@ -1261,7 +1262,7 @@
           Building brands that<br/><span>break through the noise.</span>
         </h1>
         <p class="hero-sub fade-up delay-2">
-          Marketing leader who takes startups from 0 to 1 and beyond. Technical foundation, entrepreneurial mindset, and a genuine passion for creative thinking. I build global teams and iconic brands that win.
+          Marketing leader who takes startups from 0 to 1 and beyond. Software engineer background, entrepreneurial mindset, and a genuine passion for creative thinking. I build global teams and iconic brands that win.
         </p>
         <div class="hero-ctas fade-up delay-3">
           <a href="#contact" class="btn btn-primary">
