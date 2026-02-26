@@ -556,6 +556,7 @@
        REDDIT MODE — full Reddit UI replica
        ════════════════════════════════════════ */
     body.reddit-mode {
+      overflow-x: hidden;
       --rd-orange:  #FF4500;
       --rd-blue:    #0079D3;
       --rd-bg:      #DAE0E6;
@@ -699,19 +700,28 @@
 
     /* ── Reddit page layout: feed + sidebar ── */
     body.reddit-mode section {
-      padding: 0; background: var(--rd-bg);
+      padding: 20px 360px 20px 24px; /* right: 360px leaves room for 296px sidebar + gap */
+      background: var(--rd-bg);
     }
     body.reddit-mode section:first-of-type { padding-top: 0; }
 
-    /* Feed wrapper for all content sections */
+    /* Feed wrapper — uniform, takes full width of the constrained section */
     body.reddit-mode #pillars .pillars-grid,
     body.reddit-mode #achievements .achievements-inner,
     body.reddit-mode #campaigns .campaigns-inner,
     body.reddit-mode #quotes .quotes-inner,
     body.reddit-mode #interviews .interviews-inner,
     body.reddit-mode #contact .contact-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 20px 24px;
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 16px 0 0 0;
+      box-sizing: border-box;
+    }
+    /* Pillars outer div also needs constraining */
+    body.reddit-mode #pillars > div[style] {
+      max-width: 100% !important;
+      margin: 0 !important;
     }
 
     /* Section headers become subreddit post-list headers */
@@ -883,7 +893,7 @@
 
     /* ── Achievements ── */
     body.reddit-mode #achievements { background: var(--rd-bg); }
-    body.reddit-mode .achievements-inner { max-width: none !important; }
+    body.reddit-mode .achievements-inner { /* inherits max-width from shared feed wrapper rule */ }
     body.reddit-mode .timeline { padding-left: 0; }
     body.reddit-mode .timeline::before { display: none; }
     body.reddit-mode .tl-dot { display: none; }
@@ -1873,7 +1883,7 @@
         if (!document.getElementById('rd-sidebar-fixed')) {
           const sidebar = document.createElement('div');
           sidebar.id = 'rd-sidebar-fixed';
-          sidebar.style.cssText = 'position:fixed;top:80px;right:24px;width:296px;z-index:50;max-height:calc(100vh - 100px);overflow-y:auto;';
+          sidebar.style.cssText = 'position:fixed;top:80px;right:24px;width:296px;z-index:50;max-height:calc(100vh - 100px);overflow-y:auto;overflow-x:hidden;';
           sidebar.innerHTML = buildSidebar();
           document.body.appendChild(sidebar);
         }
