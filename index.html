@@ -1061,10 +1061,11 @@
 
     /* ── Reddit Mode: Mobile — full Reddit app feel ── */
     @media (max-width: 768px) {
-      /* Nav becomes Reddit orange mobile bar */
+      /* Nav: orange bar, hide links, show hamburger */
       body.reddit-mode nav {
         background: var(--rd-orange) !important;
         border-bottom: none !important;
+        height: 48px !important;
       }
       body.reddit-mode .nav-logo {
         background: none !important;
@@ -1072,29 +1073,46 @@
         -webkit-text-fill-color: #fff !important;
         color: #fff !important;
       }
-      body.reddit-mode .hamburger span {
-        background: #fff !important;
-      }
-      body.reddit-mode .reddit-toggle-btn {
-        background: rgba(255,255,255,0.2) !important;
-        color: #fff !important;
-      }
-      /* Hamburger dropdown: orange bg with white links, positioned below 48px nav */
+      /* Hide inline nav links — they go in hamburger dropdown */
       body.reddit-mode .nav-links {
-        background: #E03D00 !important; /* slightly darker orange for dropdown */
-        backdrop-filter: none !important;
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute !important;
         top: 48px !important;
+        left: 0 !important; right: 0 !important;
+        background: #C73800 !important;
+        backdrop-filter: none !important;
         padding: 0 !important;
         border-bottom: none !important;
+        z-index: 99 !important;
+      }
+      body.reddit-mode .nav-links.open {
+        display: flex !important;
       }
       body.reddit-mode .nav-links a {
         color: #fff !important;
+        font-size: 1rem !important;
+        padding: 15px 20px !important;
         border-bottom: 1px solid rgba(255,255,255,0.15) !important;
-        padding: 14px 20px !important;
       }
       body.reddit-mode .nav-links a:hover {
-        background: rgba(0,0,0,0.1) !important;
+        background: rgba(0,0,0,0.12) !important;
         text-decoration: none !important;
+      }
+      /* Show hamburger with white bars */
+      body.reddit-mode .hamburger {
+        display: flex !important;
+      }
+      body.reddit-mode .hamburger span {
+        background: #fff !important;
+      }
+      /* Toggle button: compact, white pill */
+      body.reddit-mode .reddit-toggle-btn {
+        background: rgba(255,255,255,0.25) !important;
+        border: 1px solid rgba(255,255,255,0.4) !important;
+        color: #fff !important;
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.6rem !important;
       }
 
       /* Hero: centered mobile profile — avatar above text */
